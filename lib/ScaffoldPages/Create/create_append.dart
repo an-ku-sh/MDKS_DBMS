@@ -29,26 +29,17 @@ class _CreateAppendState extends State<CreateAppend> {
       ),
       body: Column(
         children: [
-          Container(
-            color: Colors.blue,
-            height: 60,
-          ),
           Expanded(
             child: ListView.builder(
               itemCount: listOfWorksheets.length,
               itemBuilder: (context, index) => Card(
                 elevation: 1,
-                margin: const EdgeInsets.symmetric(vertical: 2),
+                margin: const EdgeInsets.symmetric(vertical: 6),
                 child: ListTile(
-                  leading: const CircleAvatar(
-                    radius: 30.0,
-                    backgroundColor: Colors.transparent,
-                  ),
                   title: Text(listOfWorksheets[index]
                       .toString()
                       //removing .json from Woeksheet name
                       .substring(0, listOfWorksheets[index].indexOf('.'))),
-                  //subtitle: Text(''),
                 ),
               ),
             ),
