@@ -2,11 +2,16 @@
 import 'dart:io';
 import 'package:flutter/services.dart' as services;
 import 'dart:convert';
+
 //Packages
-import 'package:mdks/DataBaseBackend/product_data_model.dart';
+import '../DataBaseBackend/product_data_model.dart';
+import '../ScaffoldPages/View_Update/view_update_export.dart';
+
+//GLobal fields
+List<String> listOfWorksheets = [];
 
 //Func() to Return a list of Json File Names
-Future<List<String>> CreateListOfJsonFileNames() async {
+Future<List<String>> createListOfJsonFileNames() async {
   //selecting the directory
   Directory dir = Directory(r"lib\DataBaseBackend\JsonFiles");
 
@@ -28,7 +33,7 @@ Future<List<String>> CreateListOfJsonFileNames() async {
 }
 
 //Func() to return a List<ProductDataModel>
-Future<List<ProductDataModel>> ReadJsonData(String jsonFileName) async {
+Future<List<ProductDataModel>> readJsonData(String jsonFileName) async {
   final jsonData = await services.rootBundle
       .loadString('lib/DataBaseBackend/JsonFiles/$jsonFileName');
   final listFromJson = json.decode(jsonData) as List<dynamic>;
@@ -36,6 +41,8 @@ Future<List<ProductDataModel>> ReadJsonData(String jsonFileName) async {
   return listFromJson.map((e) => ProductDataModel.fromJson(e)).toList();
 }
 
-
-//Creating new worksheet 
-//appending elements to a worksheet 
+initializeListOfWorkSheets() async {
+  List<String> l = await createListOfJsonFileNames();
+  listOfWorksheets = l;
+  allUsers = await readJsonData(l[0]);
+}
