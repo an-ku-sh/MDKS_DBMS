@@ -44,7 +44,10 @@ class _CreateAppendState extends State<CreateAppend> {
                     radius: 30.0,
                     backgroundColor: Colors.transparent,
                   ),
-                  title: Text(listOfWorksheets[index].toString()),
+                  title: Text(listOfWorksheets[index]
+                      .toString()
+                      //removing .json from Woeksheet name
+                      .substring(0, listOfWorksheets[index].indexOf('.'))),
                   //subtitle: Text(''),
                 ),
               ),
