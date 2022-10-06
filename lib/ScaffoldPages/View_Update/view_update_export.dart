@@ -89,8 +89,6 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
                         child: ListTile(
                           leading: const CircleAvatar(
                             radius: 30.0,
-                            // backgroundImage: NetworkImage(
-                            //     foundUsers[index].imageUrl.toString()),
                             backgroundColor: Colors.transparent,
                           ),
                           title: Text(foundUsers[index].name.toString()),

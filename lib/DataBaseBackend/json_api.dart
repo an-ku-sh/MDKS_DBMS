@@ -6,7 +6,7 @@ import 'dart:convert';
 
 //Packages
 import '../DataBaseBackend/product_data_model.dart';
-// import '../ScaffoldPages/View_Update/view_update_export.dart';
+import '../ScaffoldPages/View_Update/view_update_export.dart';
 
 //GLobal fields
 List<String> listOfWorksheets = [];
@@ -40,19 +40,19 @@ Future<List<String>> createListOfWorksheets() async {
 }
 
 //Func() to return a List<ProductDataModel>
-// Future<List<ProductDataModel>> readJsonData(String jsonFileName) async {
-//   final jsonData =
-//       await services.rootBundle.loadString(jsonFilesDir + '\\$jsonFileName');
-//   final listFromJson = json.decode(jsonData) as List<dynamic>;
-//   //print(listFromJson.map((e) => ProductDataModel.fromJson(e)).toList()[0].name);
-//   return listFromJson.map((e) => ProductDataModel.fromJson(e)).toList();
-// }
+Future<List<ProductDataModel>> readJsonData(String jsonFileName) async {
+  final jsonData =
+      await services.rootBundle.loadString(jsonFilesDir + '\\$jsonFileName');
+  final listFromJson = json.decode(jsonData) as List<dynamic>;
+  //print(listFromJson.map((e) => ProductDataModel.fromJson(e)).toList()[0].name);
+  return listFromJson.map((e) => ProductDataModel.fromJson(e)).toList();
+}
 
 initializeListOfWorkSheets() async {
   List<String> l = await createListOfWorksheets();
   listOfWorksheets = l;
   //print(listOfWorksheets);
-  //allUsers = await readJsonData(l[0]);
+  allUsers = await readJsonData(l[0]);
 }
 
 createWorksheet() {}
