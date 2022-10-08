@@ -26,7 +26,7 @@ void main() async {
 
   // Initializing Json API
   initializeJsonAPI();
-  writeJsonFile('generic.json');
+  writeJsonFile('generic3.json');
   //debug
 
   //Executing  MyFluentApp()

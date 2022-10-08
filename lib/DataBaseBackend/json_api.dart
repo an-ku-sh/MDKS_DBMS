@@ -53,10 +53,13 @@ initializeJsonAPI() async {
   //initializing list of worksheets
   List<String> l = await createListOfWorksheets();
   listOfWorksheets = l;
+  //list of json files
 
   //setting default worksheet
-  List l2 = await returnJsonObjectList(listOfWorksheets[0]);
+  List l2 = await returnJsonObjectList(listOfWorksheets[1]);
   allStudents = l2;
+  //list of  [Instance of 'PlaySchoolDataModel', Instance of 'PlaySchoolDataModel', Instance of 'PlaySchoolDataModel']
+  print(allStudents);
 }
 
 Future<List> returnJsonObjectList(String jsonFileName) async {
@@ -67,6 +70,7 @@ Future<List> returnJsonObjectList(String jsonFileName) async {
 
   //decoding the Json File
   final listFromJson = json.decode(jsonData) as List<dynamic>;
+
   //print(listFromJson.map((e) => ProductDataModel.fromJson(e)).toList()[0].name);
   if (jsonFileName.toLowerCase().contains('playschool')) {
     return listFromJson.map((e) => PlaySchoolDataModel.fromJson(e)).toList();
@@ -75,14 +79,20 @@ Future<List> returnJsonObjectList(String jsonFileName) async {
   }
 }
 
-Future<PlaySchoolDataModel> writeJsonFile(String jsonFileName) async {
+writeJsonFile(String jsonFileName) async {
+  //debug Data input
   final PlaySchoolDataModel _playSchoolDataModel =
       PlaySchoolDataModel(name: 'encodedName1', fnamephone: 'encodedfname1');
 
-  //Accessing the Json File
+  //Accessing the Json File/ Worksheet
   String dir = await returnJsonDirPath();
   File _file = File('$dir\\$jsonFileName');
-  //
-  await _file.writeAsString(json.encode(_playSchoolDataModel));
-  return _playSchoolDataModel;
+
+  //Converting the Json file to a list<Model Type>
+  List l = await returnJsonObjectList(jsonFileName);
+  print(l);
+  
+  //Writing to the Json File
+  //await _file.writeAsString(json.encode(_playSchoolDataModel));
+  //return _playSchoolDataModel;
 }
