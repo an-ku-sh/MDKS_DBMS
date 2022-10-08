@@ -53,7 +53,7 @@ initializeJsonAPI() async {
   //initializing list of worksheets
   List<String> l = await createListOfWorksheets();
   listOfWorksheets = l;
-  
+
   //setting default worksheet
   List l2 = await returnJsonObjectList(listOfWorksheets[0]);
   allStudents = l2;
@@ -75,45 +75,14 @@ Future<List> returnJsonObjectList(String jsonFileName) async {
   }
 }
 
-writeJsonFile() async {}
+Future<PlaySchoolDataModel> writeJsonFile(String jsonFileName) async {
+  final PlaySchoolDataModel _playSchoolDataModel =
+      PlaySchoolDataModel(name: 'encodedName1', fnamephone: 'encodedfname1');
 
-
-
-
-
-
-
-//TMP
-
-// Future<List<ProductDataModel>> returnJsonDataList(String jsonFileName) async {
-//   //Accessing the Json File
-//   String dir = await returnJsonDirPath();
-//   File file = File('$dir\\$jsonFileName');
-//   //print(file.path);
-//   String jsonData = await file.readAsString();
-
-//   //decoding the Json File
-//   final listFromJson = json.decode(jsonData) as List<dynamic>;
-//   //print(listFromJson.map((e) => ProductDataModel.fromJson(e)).toList()[0].name);
-//   return listFromJson.map((e) => ProductDataModel.fromJson(e)).toList();
-// }
-
-// //Func() to return a List<ProductDataModel>
-// Future<List<ProductDataModel>> returnJsonDataList(String jsonFileName) async {
-//   final jsonData =
-//       await services.rootBundle.loadString(jsonFilesDir + '\\$jsonFileName');
-//   final listFromJson = json.decode(jsonData) as List<dynamic>;
-//   //print(listFromJson.map((e) => ProductDataModel.fromJson(e)).toList()[0].name);
-//   return listFromJson.map((e) => ProductDataModel.fromJson(e)).toList();
-// }
-
-
-//Read Json File
-// Future readJsonFile() async {
-//   File file = await retriveJsonFile('productlist.json');
-//   String fileContent = '';
-//   if (await file.exists()) {
-//     fileContent = await file.readAsString();
-//     return json.decode(fileContent);
-//   }
-// }
+  //Accessing the Json File
+  String dir = await returnJsonDirPath();
+  File _file = File('$dir\\$jsonFileName');
+  //
+  await _file.writeAsString(json.encode(_playSchoolDataModel));
+  return _playSchoolDataModel;
+}
