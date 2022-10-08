@@ -111,7 +111,7 @@ class PlaySchoolDataModel {
 
   PlaySchoolDataModel.fromJson(Map<String, dynamic> json) {
     name = json['name'];
-    fnamephone = json['fname_phone'];
+    fnamephone = json['fnamephone'];
     mname = json['mname'];
     admdt = json['admdt'];
     fphone = json['fphone'];

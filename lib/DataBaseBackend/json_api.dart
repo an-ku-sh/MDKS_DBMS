@@ -4,9 +4,9 @@ import 'package:path_provider/path_provider.dart';
 import 'dart:convert';
 
 //Packages
-import '../DataBaseBackend/product_data_model.dart';
+import 'package:mdks/DataBaseBackend/DataModels/playschool_data.model.dart';
 
-//GLobal fields
+//Global fields
 List<String> listOfWorksheets = [];
 String jsonFilesDir = '';
 
@@ -51,17 +51,17 @@ initializeListOfWorkSheets() async {
   listOfWorksheets = l;
 }
 
-Future<List<ProductDataModel>> returnJsonDataList(String jsonFileName) async {
+Future<List<PlaySchoolDataModel>> returnJsonDataList(
+    String jsonFileName) async {
   //Accessing the Json File
   String dir = await returnJsonDirPath();
   File file = File('$dir\\$jsonFileName');
-  //print(file.path);
   String jsonData = await file.readAsString();
 
   //decoding the Json File
   final listFromJson = json.decode(jsonData) as List<dynamic>;
   //print(listFromJson.map((e) => ProductDataModel.fromJson(e)).toList()[0].name);
-  return listFromJson.map((e) => ProductDataModel.fromJson(e)).toList();
+  return listFromJson.map((e) => PlaySchoolDataModel.fromJson(e)).toList();
 }
 
 writeJsonFile() async {}
@@ -74,6 +74,18 @@ writeJsonFile() async {}
 
 //TMP
 
+// Future<List<ProductDataModel>> returnJsonDataList(String jsonFileName) async {
+//   //Accessing the Json File
+//   String dir = await returnJsonDirPath();
+//   File file = File('$dir\\$jsonFileName');
+//   //print(file.path);
+//   String jsonData = await file.readAsString();
+
+//   //decoding the Json File
+//   final listFromJson = json.decode(jsonData) as List<dynamic>;
+//   //print(listFromJson.map((e) => ProductDataModel.fromJson(e)).toList()[0].name);
+//   return listFromJson.map((e) => ProductDataModel.fromJson(e)).toList();
+// }
 
 // //Func() to return a List<ProductDataModel>
 // Future<List<ProductDataModel>> returnJsonDataList(String jsonFileName) async {

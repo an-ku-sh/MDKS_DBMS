@@ -2,10 +2,10 @@
 import 'package:flutter/material.dart';
 
 //Packages
-import '../../DataBaseBackend/product_data_model.dart';
+import '../../DataBaseBackend/DataModels/playschool_data.model.dart';
 
 // allUsers == a worksheet
-List<ProductDataModel> allUsers = [];
+List<PlaySchoolDataModel> allStudents = [];
 
 //ViewUpdateExport(){}
 class ViewUpdateExport extends StatefulWidget {
@@ -19,25 +19,25 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
   //Sorting
 
   // This list holds the data for the list view
-  List<ProductDataModel> foundUsers = [];
+  List<PlaySchoolDataModel> foundStudents = [];
 
   //init()
   @override
   initState() {
     // at the beginning, all users are shown
-    foundUsers = allUsers;
+    foundStudents = allStudents;
     super.initState();
   }
 
   // This function is called whenever the text field changes
   void _runFilter(String enteredKeyword) {
-    List<ProductDataModel> results = [];
+    List<PlaySchoolDataModel> results = [];
     if (enteredKeyword.isEmpty) {
       // if the search field is empty or only contains white-space, we'll display all users
-      results = allUsers;
+      results = allStudents;
     } else {
-      results = allUsers
-          .where((user) => user.name
+      results = allStudents
+          .where((student) => student.name
               .toString()
               .toLowerCase()
               .contains(enteredKeyword.toLowerCase()))
@@ -47,7 +47,7 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
 
     // Refresh the UI
     setState(() {
-      foundUsers = results;
+      foundStudents = results;
     });
   }
 
@@ -80,9 +80,9 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
               height: 20,
             ),
             Expanded(
-              child: foundUsers.isNotEmpty
+              child: foundStudents.isNotEmpty
                   ? ListView.builder(
-                      itemCount: foundUsers.length,
+                      itemCount: foundStudents.length,
                       itemBuilder: (context, index) => Card(
                         elevation: 1,
                         margin: const EdgeInsets.symmetric(vertical: 2),
@@ -91,8 +91,9 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
                             radius: 30.0,
                             backgroundColor: Colors.transparent,
                           ),
-                          title: Text(foundUsers[index].name.toString()),
-                          subtitle: Text('${foundUsers[index].oldPrice}'),
+                          title: Text(foundStudents[index].name.toString()),
+                          subtitle:
+                              Text(foundStudents[index].fnamephone.toString()),
                         ),
                       ),
                     )
