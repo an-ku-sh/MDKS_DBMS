@@ -56,7 +56,7 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('View or Update '),
+        title: const Text('View or Update'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(10),
@@ -89,8 +89,6 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
                         child: ListTile(
                           leading: const CircleAvatar(
                             radius: 30.0,
-                            // backgroundImage: NetworkImage(
-                            //     foundUsers[index].imageUrl.toString()),
                             backgroundColor: Colors.transparent,
                           ),
                           title: Text(foundUsers[index].name.toString()),

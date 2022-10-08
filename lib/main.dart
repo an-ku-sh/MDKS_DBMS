@@ -1,11 +1,12 @@
 //Importing Dependencies
+import 'dart:io';
+
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:mdks/DataBaseBackend/json_api.dart';
-import 'package:mdks/ScaffoldPages/View_Update/view_update_export.dart';
-
-//Importing Libraries
-import 'fluent_home_page.dart';
 import 'package:window_manager/window_manager.dart';
+
+//Importing packages
+import 'fluent_home_page.dart';
 
 //Main
 void main() async {
@@ -25,13 +26,14 @@ void main() async {
     await windowManager.setSkipTaskbar(false);
   });
 
-  // Json Sheets Initialization
-  /* Obtaining A list of  Json File Names*/
-  List<String> listOfJsonFileNamesFromMain = await CreateListOfJsonFileNames();
-  /* assigning a List<ProductDataType> to allUsers()*/
-  allUsers = await ReadJsonData(listOfJsonFileNamesFromMain[0]);
+  // Initializing Json API
+  initializeListOfWorkSheets();
 
-  //Executing the MyFluentApp()
+  //debug
+  File debugJson = await retriveJsonFile('productlist.json');
+  print('print debub $debugJson.path');
+  
+  //Executing  MyFluentApp()
   runApp(const MyFluentApp());
 }
 
