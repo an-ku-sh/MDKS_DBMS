@@ -1,5 +1,6 @@
 //Dependencies
 import 'package:flutter/material.dart';
+import 'package:mdks/DataBaseBackend/json_api.dart';
 
 //Packages
 
@@ -15,6 +16,17 @@ class ViewUpdateExport extends StatefulWidget {
 }
 
 class _ViewUpdateExportState extends State<ViewUpdateExport> {
+  //Drop Down
+  String selectedItem = listOfWorksheets[0];
+
+  setStudentList(String jsonFileName) async {
+    List l = await returnJsonObjectList(jsonFileName);
+    setState(() {
+      allStudents = l;
+      foundStudents = allStudents;
+    });
+  }
+
   //Sorting
 
   // This list holds the data for the list view
@@ -23,8 +35,7 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
   //init()
   @override
   initState() {
-    // at the beginning, all users are shown
-    foundStudents = allStudents;
+    setStudentList(listOfWorksheets[0]);
     super.initState();
   }
 
@@ -54,8 +65,30 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
         title: const Text('View or Update'),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SizedBox(
+              width: 240,
+              child: DropdownButton(
+                  alignment: Alignment.centerLeft,
+                  items: listOfWorksheets
+                      .map(
+                        (e) => DropdownMenuItem(
+                          value: e,
+                          child: Text(e),
+                        ),
+                      )
+                      .toList(),
+                  value: selectedItem,
+                  onChanged: (item) => setState(() {
+                        selectedItem = item!;
+                        setStudentList(item);
+                      })),
+            ),
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(10),

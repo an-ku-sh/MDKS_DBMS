@@ -7,6 +7,8 @@ import 'dart:convert';
 //Packages
 import 'package:mdks/DataBaseBackend/DataModels/playschool_data.model.dart';
 
+import '../ScaffoldPages/View_Update/view_update_export.dart';
+
 //Global fields
 List<String> listOfWorksheets = [];
 String jsonFilesDir = '';
@@ -47,9 +49,14 @@ Future<List<String>> createListOfWorksheets() async {
   return listOfJsonFileNames;
 }
 
-initializeListOfWorkSheets() async {
+initializeJsonAPI() async {
+  //initializing list of worksheets
   List<String> l = await createListOfWorksheets();
   listOfWorksheets = l;
+
+  //setting default worksheet
+  List l2 = await returnJsonObjectList(listOfWorksheets[0]);
+  allStudents = l2;
 }
 
 Future<List> returnJsonObjectList(String jsonFileName) async {

@@ -4,9 +4,7 @@ import 'package:window_manager/window_manager.dart';
 
 //Importing packages
 import 'fluent_home_page.dart';
-import './DataBaseBackend/DataModels/playschool_data.model.dart';
 import './DataBaseBackend/json_api.dart';
-import './ScaffoldPages/View_Update/view_update_export.dart';
 
 //Main
 void main() async {
@@ -27,12 +25,9 @@ void main() async {
   });
 
   // Initializing Json API
-  initializeListOfWorkSheets();
+  initializeJsonAPI();
 
   //debug
-  List l = await returnJsonObjectList('generic.json');
-  print(l);
-  allStudents = l;
 
   //Executing  MyFluentApp()
   runApp(const MyFluentApp());
