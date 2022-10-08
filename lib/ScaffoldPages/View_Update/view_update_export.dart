@@ -71,21 +71,24 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
             padding: const EdgeInsets.all(8.0),
             child: SizedBox(
               width: 240,
-              child: DropdownButton(
-                  alignment: Alignment.centerLeft,
-                  items: listOfWorksheets
-                      .map(
-                        (e) => DropdownMenuItem(
-                          value: e,
-                          child: Text(e),
-                        ),
-                      )
-                      .toList(),
-                  value: selectedItem,
-                  onChanged: (item) => setState(() {
-                        selectedItem = item!;
-                        setStudentList(item);
-                      })),
+              child: DropdownButtonFormField(
+                alignment: Alignment.centerLeft,
+                items: listOfWorksheets
+                    .map(
+                      (e) => DropdownMenuItem(
+                        value: e,
+                        child: Text(e),
+                      ),
+                    )
+                    .toList(),
+                value: selectedItem,
+                onChanged: (item) => setState(
+                  () {
+                    selectedItem = item!;
+                    setStudentList(item);
+                  },
+                ),
+              ),
             ),
           ),
         ],
