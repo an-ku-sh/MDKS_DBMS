@@ -3,9 +3,11 @@ import 'dart:io';
 
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:mdks/DataBaseBackend/json_api.dart';
+import 'package:mdks/ScaffoldPages/View_Update/view_update_export.dart';
 import 'package:window_manager/window_manager.dart';
 
 //Importing packages
+import 'DataBaseBackend/product_data_model.dart';
 import 'fluent_home_page.dart';
 
 //Main
@@ -30,9 +32,9 @@ void main() async {
   initializeListOfWorkSheets();
 
   //debug
-  File debugJson = await retriveJsonFile('productlist.json');
-  print('print debub $debugJson.path');
-  
+  List<ProductDataModel> l = await returnJsonDataList('productlist.json');
+  allUsers = l;
+
   //Executing  MyFluentApp()
   runApp(const MyFluentApp());
 }

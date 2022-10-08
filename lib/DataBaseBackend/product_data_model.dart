@@ -20,4 +20,12 @@ class ProductDataModel {
     oldPrice = json['oldPrice'];
     price = json['price'];
   }
+
+  Map<dynamic, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'category': category,
+        'oldPrice': oldPrice,
+        'price': price
+      };
 }

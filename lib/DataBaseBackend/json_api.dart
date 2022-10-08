@@ -1,17 +1,22 @@
 //dependencies
 import 'dart:io';
-import 'package:flutter/services.dart' as services;
 import 'package:path_provider/path_provider.dart';
 import 'dart:convert';
 
 //Packages
 import '../DataBaseBackend/product_data_model.dart';
-import '../ScaffoldPages/View_Update/view_update_export.dart';
 
 //GLobal fields
 List<String> listOfWorksheets = [];
 String jsonFilesDir = '';
-String jsonFilePath = '$jsonFilePath\\productlist.json';
+
+Future<String> returnJsonDirPath() async {
+  var applicationDocumentsDirectory = await getApplicationDocumentsDirectory();
+  String documentDirectoryPath = applicationDocumentsDirectory.path;
+  //Directory mdksDir = Directory('$documentDirectoryPath\\mdks');
+  jsonFilesDir = '$documentDirectoryPath\\mdks';
+  return jsonFilesDir;
+}
 
 //Func() to Return list of Worksheets
 Future<List<String>> createListOfWorksheets() async {
@@ -22,7 +27,7 @@ Future<List<String>> createListOfWorksheets() async {
   //Getting the path to application files directory
   Directory mdksDir = Directory('$documentDirectoryPath\\mdks');
   jsonFilesDir = '$documentDirectoryPath\\mdks';
-  print(jsonFilesDir);
+  //print(jsonFilesDir);
   //making a list of all files inside directory
   List<FileSystemEntity> allFilesInDir = mdksDir.listSync();
   //print(allFilesInDir);
@@ -37,29 +42,55 @@ Future<List<String>> createListOfWorksheets() async {
     }
   }
   //returning the file containing names of Json files
-  print(listOfJsonFileNames);
+  //print(listOfJsonFileNames);
   return listOfJsonFileNames;
-}
-
-//retrieve Json File
-Future<File> retriveJsonFile(String jsonFileName) async {
-  String path = await jsonFilesDir;
-  return File('$jsonFilesDir//$json');
 }
 
 initializeListOfWorkSheets() async {
   List<String> l = await createListOfWorksheets();
   listOfWorksheets = l;
-  //print(listOfWorksheets);
-  // allUsers = await returnWorkSheet(l[0]);
-  // print(allUsers);
 }
 
+Future<List<ProductDataModel>> returnJsonDataList(String jsonFileName) async {
+  //Accessing the Json File
+  String dir = await returnJsonDirPath();
+  File file = File('$dir\\$jsonFileName');
+  //print(file.path);
+  String jsonData = await file.readAsString();
+
+  //decoding the Json File
+  final listFromJson = json.decode(jsonData) as List<dynamic>;
+  //print(listFromJson.map((e) => ProductDataModel.fromJson(e)).toList()[0].name);
+  return listFromJson.map((e) => ProductDataModel.fromJson(e)).toList();
+}
+
+writeJsonFile() async {}
+
+
+
+
+
+
+
+//TMP
+
+
 // //Func() to return a List<ProductDataModel>
-// Future<List<ProductDataModel>> readJsonData(String jsonFileName) async {
+// Future<List<ProductDataModel>> returnJsonDataList(String jsonFileName) async {
 //   final jsonData =
 //       await services.rootBundle.loadString(jsonFilesDir + '\\$jsonFileName');
 //   final listFromJson = json.decode(jsonData) as List<dynamic>;
 //   //print(listFromJson.map((e) => ProductDataModel.fromJson(e)).toList()[0].name);
 //   return listFromJson.map((e) => ProductDataModel.fromJson(e)).toList();
+// }
+
+
+//Read Json File
+// Future readJsonFile() async {
+//   File file = await retriveJsonFile('productlist.json');
+//   String fileContent = '';
+//   if (await file.exists()) {
+//     fileContent = await file.readAsString();
+//     return json.decode(fileContent);
+//   }
 // }
