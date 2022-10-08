@@ -1,5 +1,6 @@
 //dependencies
 import 'dart:io';
+import 'package:mdks/DataBaseBackend/DataModels/generic_data_model.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:convert';
 
@@ -51,8 +52,7 @@ initializeListOfWorkSheets() async {
   listOfWorksheets = l;
 }
 
-Future<List<PlaySchoolDataModel>> returnJsonDataList(
-    String jsonFileName) async {
+Future<List> returnJsonObjectList(String jsonFileName) async {
   //Accessing the Json File
   String dir = await returnJsonDirPath();
   File file = File('$dir\\$jsonFileName');
@@ -61,7 +61,11 @@ Future<List<PlaySchoolDataModel>> returnJsonDataList(
   //decoding the Json File
   final listFromJson = json.decode(jsonData) as List<dynamic>;
   //print(listFromJson.map((e) => ProductDataModel.fromJson(e)).toList()[0].name);
-  return listFromJson.map((e) => PlaySchoolDataModel.fromJson(e)).toList();
+  if (jsonFileName.toLowerCase().contains('playschool')) {
+    return listFromJson.map((e) => PlaySchoolDataModel.fromJson(e)).toList();
+  } else {
+    return listFromJson.map((e) => GenericInstitute.fromJson(e)).toList();
+  }
 }
 
 writeJsonFile() async {}

@@ -30,9 +30,8 @@ void main() async {
   initializeListOfWorkSheets();
 
   //debug
-  List<PlaySchoolDataModel> l = await returnJsonDataList('preschool.json');
+  List l = await returnJsonObjectList('generic.json');
   print(l);
-
   allStudents = l;
 
   //Executing  MyFluentApp()

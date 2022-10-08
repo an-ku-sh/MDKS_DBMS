@@ -2,10 +2,9 @@
 import 'package:flutter/material.dart';
 
 //Packages
-import '../../DataBaseBackend/DataModels/playschool_data.model.dart';
 
-// allUsers == a worksheet
-List<PlaySchoolDataModel> allStudents = [];
+// allStudents == a worksheet
+List allStudents = [];
 
 //ViewUpdateExport(){}
 class ViewUpdateExport extends StatefulWidget {
@@ -19,7 +18,7 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
   //Sorting
 
   // This list holds the data for the list view
-  List<PlaySchoolDataModel> foundStudents = [];
+  List foundStudents = [];
 
   //init()
   @override
@@ -31,7 +30,7 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
 
   // This function is called whenever the text field changes
   void _runFilter(String enteredKeyword) {
-    List<PlaySchoolDataModel> results = [];
+    List results = [];
     if (enteredKeyword.isEmpty) {
       // if the search field is empty or only contains white-space, we'll display all users
       results = allStudents;
