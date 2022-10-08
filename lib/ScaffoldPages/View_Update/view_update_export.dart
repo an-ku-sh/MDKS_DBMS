@@ -56,7 +56,7 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('View or Update '),
+        title: const Text('View or Update'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(10),

@@ -1,4 +1,6 @@
 //Importing Dependencies
+import 'dart:io';
+
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:mdks/DataBaseBackend/json_api.dart';
 import 'package:window_manager/window_manager.dart';
@@ -28,7 +30,9 @@ void main() async {
   initializeListOfWorkSheets();
 
   //debug
- 
+  File debugJson = await retriveJsonFile('productlist.json');
+  print('print debub $debugJson.path');
+  
   //Executing  MyFluentApp()
   runApp(const MyFluentApp());
 }
