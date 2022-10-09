@@ -114,4 +114,30 @@ writeJsonFile(
   await _file.writeAsString(json.encode(l));
 }
 
-createStudentRecord() {}
+createStudentRecord(
+  //File identifier
+  String jsonFileName,
+  //Fields
+  String sname,
+  String fnamephone,
+) async {
+  //Accessing the Json File/ Worksheet
+  String dir = await returnJsonDirPath();
+  File _file = File('$dir\\$jsonFileName');
+
+  //Converting the Json file to a list<Model Type>
+  List l = await returnJsonObjectList(jsonFileName);
+
+  if (jsonFileName.contains('playschool')) {
+    PlaySchoolDataModel playSchoolDataModel =
+        PlaySchoolDataModel(name: sname, fnamephone: fnamephone);
+    l.add(playSchoolDataModel);
+  } else {
+    GenericInstitute genericInstitute =
+        GenericInstitute(name: sname, fnamephone: fnamephone);
+    l.add(genericInstitute);
+  }
+
+  //Writing the entire list to the Json File as a string
+  await _file.writeAsString(json.encode(l));
+}

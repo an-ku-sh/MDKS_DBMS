@@ -51,7 +51,8 @@ class _CreateAppendState extends State<CreateAppend> {
                                     padding: const EdgeInsets.all(20.0),
                                     child: TextField(
                                       decoration: const InputDecoration(
-                                          hintText: 'Enter Student Name'),
+                                        hintText: 'Enter Student Name',
+                                      ),
                                       onChanged: (value) {
                                         sname = value;
                                       },
@@ -80,33 +81,18 @@ class _CreateAppendState extends State<CreateAppend> {
                                   TextButton(
                                       onPressed: () {
                                         if (sname != null &&
-                                            fnamePhone != null) {
-                                          showDialog(
-                                            context: context,
-                                            builder: (context) {
-                                              return AlertDialog(
-                                                title: Text(
-                                                    'create a new record in ${listOfWorksheets[index]} ?'),
-                                                content: SizedBox(
-                                                  height: 500,
-                                                  width: 500,
-                                                  child: Column(
-                                                    children: [
-                                                      Text(
-                                                        'Student Name : $sname',
-                                                      ),
-                                                      Text(
-                                                        'Father\'s Name \\ Phone Number: $fnamePhone',
-                                                      )
-                                                    ],
-                                                  ),
-                                                ),
-                                              );
-                                            },
+                                            sname != '' &&
+                                            fnamePhone != null &&
+                                            fnamePhone != '') {
+                                          createStudentRecord(
+                                            listOfWorksheets[index],
+                                            sname!,
+                                            fnamePhone!,
                                           );
+                                          Navigator.of(context).pop();
                                         }
                                       },
-                                      child: Text('data'))
+                                      child: const Text('Submit'))
                                 ],
                               );
                             });
