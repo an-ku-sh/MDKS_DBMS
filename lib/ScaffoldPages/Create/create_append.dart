@@ -21,7 +21,7 @@ class _CreateAppendState extends State<CreateAppend> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Create \\ Manage Worksheets'),
+        title: const Text('Worksheets'),
       ),
       body: Column(
         children: [
@@ -34,8 +34,84 @@ class _CreateAppendState extends State<CreateAppend> {
                 child: ListTile(
                   title: Text(listOfWorksheets[index]
                       .toString()
-                      //removing .json from Woeksheet name
+                      //removing .json from Worksheet name
                       .substring(0, listOfWorksheets[index].indexOf('.'))),
+                  trailing: IconButton(
+                      onPressed: () {
+                        String? sname;
+                        String? fnamePhone;
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: Text(
+                                    'Add Student Record in ${listOfWorksheets[index]}'),
+                                actions: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(20.0),
+                                    child: TextField(
+                                      decoration: const InputDecoration(
+                                          hintText: 'Enter Student Name'),
+                                      onChanged: (value) {
+                                        sname = value;
+                                      },
+                                      onSubmitted: (value) {
+                                        sname = value;
+                                      },
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(20.0),
+                                    child: TextField(
+                                      decoration: InputDecoration(
+                                        hintText: listOfWorksheets[index]
+                                                .contains('playschool')
+                                            ? 'Enter Father\'s Name'
+                                            : 'Enter Father\'s Phone Number',
+                                      ),
+                                      onChanged: (value) {
+                                        fnamePhone = value;
+                                      },
+                                      onSubmitted: (value) {
+                                        fnamePhone = value;
+                                      },
+                                    ),
+                                  ),
+                                  TextButton(
+                                      onPressed: () {
+                                        if (sname != null &&
+                                            fnamePhone != null) {
+                                          showDialog(
+                                            context: context,
+                                            builder: (context) {
+                                              return AlertDialog(
+                                                title: Text(
+                                                    'create a new record in ${listOfWorksheets[index]} ?'),
+                                                content: SizedBox(
+                                                  height: 500,
+                                                  width: 500,
+                                                  child: Column(
+                                                    children: [
+                                                      Text(
+                                                        'Student Name : $sname',
+                                                      ),
+                                                      Text(
+                                                        'Father\'s Name \\ Phone Number: $fnamePhone',
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                          );
+                                        }
+                                      },
+                                      child: Text('data'))
+                                ],
+                              );
+                            });
+                      },
+                      icon: const Icon(Icons.add_link_sharp)),
                 ),
               ),
             ),

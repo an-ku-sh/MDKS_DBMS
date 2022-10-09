@@ -1,6 +1,7 @@
 //Dependencies
 import 'package:flutter/material.dart';
 import 'package:mdks/DataBaseBackend/json_api.dart';
+import 'package:mdks/ScaffoldPages/View_Update/student_info.dart';
 
 //Packages
 
@@ -65,7 +66,7 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('View or Update'),
+        title: const Text('View Student Record'),
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -122,27 +123,36 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
                         elevation: 1,
                         margin: const EdgeInsets.symmetric(vertical: 2),
                         child: ListTile(
-                          leading: const CircleAvatar(
-                            radius: 30.0,
-                            backgroundColor: Colors.transparent,
-                          ),
                           title: Text(foundStudents[index].name.toString()),
                           subtitle:
                               Text(foundStudents[index].fnamephone.toString()),
                           trailing: IconButton(
                               onPressed: () {
-                                foundStudents[index].feeT1 =
-                                    'debugFeeT1 has been paid';
-                                print('changed debug parameters');
-                                print(selectedItem);
-                                writeJsonFile(
-                                  selectedItem,
-                                  foundStudents[index].name.toString(),
-                                  foundStudents[index].fnamephone.toString(),
-                                  foundStudents[index],
-                                );
-                                print(
-                                  '${foundStudents[index].name.toString()} is modified',
+                                // foundStudents[index].feeT1 =
+                                //     'debugFeeT1 has been paid';
+                                // print('changed debug parameters');
+                                // print(selectedItem);
+                                // writeJsonFile(
+                                //   selectedItem,
+                                //   foundStudents[index].name.toString(),
+                                //   foundStudents[index].fnamephone.toString(),
+                                //   foundStudents[index],
+                                // );
+                                // print(
+                                //   '${foundStudents[index].name.toString()} is modified',
+                                // );
+                                showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      scrollable: true,
+                                      title: const Text('Student Info'),
+                                      content: studentInfoWidget(
+                                        selectedItem,
+                                        foundStudents[index],
+                                      ),
+                                    );
+                                  },
                                 );
                               },
                               icon: const Icon(Icons.info_rounded)),

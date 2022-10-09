@@ -1,16 +1,12 @@
 //Importing Dependencies
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:mdks/ScaffoldPages/Create/create_append.dart';
-import 'package:mdks/ScaffoldPages/Financial/financial_records.dart';
-import 'package:mdks/ScaffoldPages/View_Update/view_update_export.dart';
 import 'package:window_manager/window_manager.dart';
 
-import 'ScaffoldPages/Home/mdks_home.dart';
-
 //Importing Navigation Pages
-
-
-//The Stateful Fluent Home Page
+import './ScaffoldPages/Home/mdks_home.dart';
+import './ScaffoldPages/View_Update/view_update_export.dart';
+import './ScaffoldPages/Create/create_append.dart';
+import './ScaffoldPages/Financial/financial_records.dart';
 
 class FluentHomePage extends StatefulWidget {
   const FluentHomePage({super.key});
@@ -75,16 +71,14 @@ class _FluentHomePageState extends State<FluentHomePage> with WindowListener {
   @override
   Widget build(BuildContext context) {
     return NavigationView(
-      appBar: const NavigationAppBar(
-        backgroundColor: Colors.grey,
-      ),
+      appBar: const NavigationAppBar(),
       key: viewKey,
       pane: NavigationPane(
         selected: _currentindex,
         onChanged: (i) => setState(() {
           _currentindex = i;
         }),
-        displayMode: PaneDisplayMode.compact,
+        displayMode: PaneDisplayMode.open,
         items: [
           PaneItem(
               icon: const Icon(FluentIcons.home_solid),

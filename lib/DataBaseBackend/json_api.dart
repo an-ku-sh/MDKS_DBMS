@@ -93,7 +93,7 @@ writeJsonFile(
 
   //Converting the Json file to a list<Model Type>
   List l = await returnJsonObjectList(jsonFileName);
-  print(l);
+
   //the index of the Data Object in the List
   int? indexOfDataObject;
   //Accessing the DataObject
@@ -104,14 +104,14 @@ writeJsonFile(
       indexOfDataObject = j;
     }
   }
-  print(indexOfDataObject);
+
   //debug writing to the List[]
   if (indexOfDataObject != null) {
     l[indexOfDataObject] = dataObject;
-    print(l);
-    print('data object set');
   }
 
   //Writing the entire list to the Json File as a string
   await _file.writeAsString(json.encode(l));
 }
+
+createStudentRecord() {}
