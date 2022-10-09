@@ -129,49 +129,6 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
                           title: Text(foundStudents[index].name.toString()),
                           subtitle:
                               Text(foundStudents[index].fnamephone.toString()),
-                          trailing: IconButton(
-                            //The Student Info
-                            onPressed: () {
-                              showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return AlertDialog(
-                                    title: const Text('Student Info'),
-                                    content: Container(
-                                      color: Colors.amberAccent,
-                                      height: double.maxFinite,
-                                      width: 1200,
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(25.0),
-                                        child: SingleChildScrollView(
-                                          physics: const ScrollPhysics(),
-                                          child: Container(
-                                            color: Colors.blueGrey,
-                                            child: Column(
-                                              children: [
-                                                TextField(
-                                                  decoration: InputDecoration(
-                                                    hintText:
-                                                        foundStudents[index]
-                                                            .name
-                                                            .toString(),
-                                                  ),
-                                                  onChanged: ((value) =>
-                                                      foundStudents[index]
-                                                          .name),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                },
-                              );
-                            },
-                            icon: const Icon(Icons.info),
-                          ),
                         ),
                       ),
                     )

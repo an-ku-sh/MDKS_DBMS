@@ -59,7 +59,7 @@ initializeJsonAPI() async {
   List l2 = await returnJsonObjectList(listOfWorksheets[1]);
   allStudents = l2;
   //list of  [Instance of 'PlaySchoolDataModel', Instance of 'PlaySchoolDataModel', Instance of 'PlaySchoolDataModel']
-  print(allStudents);
+  //print(allStudents);
 }
 
 Future<List> returnJsonObjectList(String jsonFileName) async {
@@ -79,20 +79,30 @@ Future<List> returnJsonObjectList(String jsonFileName) async {
   }
 }
 
-writeJsonFile(String jsonFileName) async {
-  //debug Data input
-  final PlaySchoolDataModel _playSchoolDataModel =
-      PlaySchoolDataModel(name: 'encodedName1', fnamephone: 'encodedfname1');
-
+writeJsonFile(String jsonFileName, String sname, String fnamephone) async {
   //Accessing the Json File/ Worksheet
   String dir = await returnJsonDirPath();
   File _file = File('$dir\\$jsonFileName');
 
   //Converting the Json file to a list<Model Type>
   List l = await returnJsonObjectList(jsonFileName);
-  print(l);
-  
-  //Writing to the Json File
-  //await _file.writeAsString(json.encode(_playSchoolDataModel));
-  //return _playSchoolDataModel;
+
+  //the index of the Data Object in the List
+  int? indexOfDataObject;
+  //Accessing the DataObject
+  for (var j = 0; j < l.length; j++) {
+    if (l[j].name.toString() == sname &&
+        l[j].fnamephone.toString() == fnamephone) {
+      //The DataObject's index
+      indexOfDataObject = j;
+    }
+  }
+
+  //debug writing to the List[]
+  if (indexOfDataObject != null) {
+    l[indexOfDataObject].name = 'enewDebuEcoded';
+  }
+
+  //Writing the entire list to the Json File as a string
+  await _file.writeAsString(json.encode(l));
 }

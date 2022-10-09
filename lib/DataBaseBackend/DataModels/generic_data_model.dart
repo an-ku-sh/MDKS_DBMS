@@ -132,4 +132,45 @@ class GenericInstitute {
     feeT12Dt = json['feeT12Dt'];
     feeT12Rno = json['feeT12Rno'];
   }
+
+  Map<dynamic, dynamic> toJson() => {
+        'name': name,
+        'fnamephone': fnamephone,
+        'feeT1': feeT1,
+        'feeT1Dt': feeT1Dt,
+        'feeT1Rno': feeT1Rno,
+        'feeT2': feeT2,
+        'feeT2Dt': feeT2Dt,
+        'feeT2Rno': feeT2Rno,
+        'feeT3': feeT3,
+        'feeT3Dt': feeT3Dt,
+        'feeT3Rno': feeT3Rno,
+        'feeT4': feeT4,
+        'feeT4Dt': feeT4Dt,
+        'feeT4Rno': feeT4Rno,
+        'feeT5': feeT5,
+        'feeT5Dt': feeT5Dt,
+        'feeT5Rno': feeT5Rno,
+        'feeT6': feeT6,
+        'feeT6Dt': feeT6Dt,
+        'feeT6Rno': feeT6Rno,
+        'feeT7': feeT7,
+        'feeT7Dt': feeT7Dt,
+        'feeT7Rno': feeT7Rno,
+        'feeT8': feeT8,
+        'feeT8Dt': feeT8Dt,
+        'feeT8Rno': feeT8Rno,
+        'feeT9': feeT9,
+        'feeT9Dt': feeT9Dt,
+        'feeT9Rno': feeT9Rno,
+        'feeT10': feeT10,
+        'feeT10Dt': feeT10Dt,
+        'feeT10Rno': feeT10Rno,
+        'feeT11': feeT11,
+        'feeT11Dt': feeT11Dt,
+        'feeT11Rno': feeT11Rno,
+        'feeT12': feeT12,
+        'feeT12Dt': feeT12Dt,
+        'feeT12Rno': feeT12Rno
+      };
 }
