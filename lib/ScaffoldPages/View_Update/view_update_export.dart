@@ -129,6 +129,23 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
                           title: Text(foundStudents[index].name.toString()),
                           subtitle:
                               Text(foundStudents[index].fnamephone.toString()),
+                          trailing: IconButton(
+                              onPressed: () {
+                                foundStudents[index].feeT1 =
+                                    'debugFeeT1 has been paid';
+                                print('changed debug parameters');
+                                print(selectedItem);
+                                writeJsonFile(
+                                  selectedItem,
+                                  foundStudents[index].name.toString(),
+                                  foundStudents[index].fnamephone.toString(),
+                                  foundStudents[index],
+                                );
+                                print(
+                                  '${foundStudents[index].name.toString()} is modified',
+                                );
+                              },
+                              icon: const Icon(Icons.info_rounded)),
                         ),
                       ),
                     )

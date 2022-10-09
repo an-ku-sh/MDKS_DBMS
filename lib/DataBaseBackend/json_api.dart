@@ -79,14 +79,21 @@ Future<List> returnJsonObjectList(String jsonFileName) async {
   }
 }
 
-writeJsonFile(String jsonFileName, String sname, String fnamephone) async {
+writeJsonFile(
+  //Identifier Parameters
+  String jsonFileName,
+  String sname,
+  String fnamephone,
+  //Data Object
+  var dataObject,
+) async {
   //Accessing the Json File/ Worksheet
   String dir = await returnJsonDirPath();
   File _file = File('$dir\\$jsonFileName');
 
   //Converting the Json file to a list<Model Type>
   List l = await returnJsonObjectList(jsonFileName);
-
+  print(l);
   //the index of the Data Object in the List
   int? indexOfDataObject;
   //Accessing the DataObject
@@ -97,10 +104,12 @@ writeJsonFile(String jsonFileName, String sname, String fnamephone) async {
       indexOfDataObject = j;
     }
   }
-
+  print(indexOfDataObject);
   //debug writing to the List[]
   if (indexOfDataObject != null) {
-    l[indexOfDataObject].name = 'enewDebuEcoded';
+    l[indexOfDataObject] = dataObject;
+    print(l);
+    print('data object set');
   }
 
   //Writing the entire list to the Json File as a string
