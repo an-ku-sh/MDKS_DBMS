@@ -141,3 +141,37 @@ createStudentRecord(
   //Writing the entire list to the Json File as a string
   await _file.writeAsString(json.encode(l));
 }
+
+deleteStudentRecord(
+  //Identifier Parameters
+  String jsonFileName,
+  String sname,
+  String fnamephone,
+) async {
+  //Accessing the Json File/ Worksheet
+  String dir = await returnJsonDirPath();
+  File _file = File('$dir\\$jsonFileName');
+
+  //Converting the Json file to a list<Model Type>
+  List l = await returnJsonObjectList(jsonFileName);
+
+  //the index of the Data Object in the List to be deleted
+  int? indexOfDataObject;
+
+  //Accessing the index of DataObject to be deleted
+  for (var j = 0; j < l.length; j++) {
+    if (l[j].name.toString() == sname &&
+        l[j].fnamephone.toString() == fnamephone) {
+      //The DataObject's index
+      indexOfDataObject = j;
+    }
+  }
+
+  //deleting the object from the List
+  if (indexOfDataObject != null) {
+    l.remove(l[indexOfDataObject]);
+  }
+
+  //Writing the entire list to the Json File as a string
+  await _file.writeAsString(json.encode(l));
+}

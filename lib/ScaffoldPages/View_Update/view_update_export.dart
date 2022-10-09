@@ -141,19 +141,25 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
                                 // print(
                                 //   '${foundStudents[index].name.toString()} is modified',
                                 // );
-                                showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return AlertDialog(
-                                      scrollable: true,
-                                      title: const Text('Student Info'),
-                                      content: studentInfoWidget(
-                                        selectedItem,
-                                        foundStudents[index],
-                                      ),
-                                    );
-                                  },
-                                );
+                                setState(() {
+                                  deleteStudentRecord(
+                                      selectedItem,
+                                      foundStudents[index].name,
+                                      foundStudents[index].fnamephone);
+                                });
+                                // showDialog(
+                                //   context: context,
+                                //   builder: (context) {
+                                //     return AlertDialog(
+                                //       scrollable: true,
+                                //       title: const Text('Student Info'),
+                                //       content: studentInfoWidget(
+                                //         selectedItem,
+                                //         foundStudents[index],
+                                //       ),
+                                //     );
+                                //   },
+                                // );
                               },
                               icon: const Icon(Icons.info_rounded)),
                         ),
