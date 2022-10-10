@@ -22,10 +22,12 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
 
   setStudentList(String jsonFileName) async {
     List l = await returnJsonObjectList(jsonFileName);
-    setState(() {
-      allStudents = l;
-      foundStudents = allStudents;
-    });
+    if (mounted) {
+      setState(() {
+        allStudents = l;
+        foundStudents = allStudents;
+      });
+    }
   }
 
   //Sorting
@@ -64,6 +66,7 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
 
   @override
   Widget build(BuildContext context) {
+    setStudentList(selectedItem);
     return Scaffold(
       appBar: AppBar(
         title: const Text('View Student Record'),
@@ -147,40 +150,39 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
                                   },
                                   icon: const Icon(Icons.info_outline)),
                               IconButton(
-                                  onPressed: () {
-                                    showDialog(
-                                        context: context,
-                                        builder: (context) {
-                                          return AlertDialog(
-                                            title: Text(
-                                                'Are Your Sure You Want to Delete ${foundStudents[index].name} from $selectedItem'),
-                                            actions: [
-                                              TextButton(
-                                                onPressed: () {
-                                                  Navigator.of(context).pop();
-                                                },
-                                                child: const Text('Cancel'),
-                                              ),
-                                              TextButton(
-                                                onPressed: () {
-                                                  setState(() {
-                                                    deleteStudentRecord(
-                                                        selectedItem,
-                                                        foundStudents[index]
-                                                            .name,
-                                                        foundStudents[index]
-                                                            .fnamephone);
-                                                  });
-                                                  Navigator.of(context).pop();
-                                                  //refershing the UI
-                                                },
-                                                child: const Text('Confirm'),
-                                              ),
-                                            ],
-                                          );
-                                        });
-                                  },
-                                  icon: const Icon(Icons.delete)),
+                                onPressed: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) => AlertDialog(
+                                      title: Text(
+                                          'Are Your Sure You Want to Delete ${foundStudents[index].name} from $selectedItem'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: const Text('Cancel'),
+                                        ),
+                                        TextButton(
+                                          onPressed: () {
+                                            //Deleting The Student Record
+                                            deleteStudentRecord(
+                                                selectedItem,
+                                                foundStudents[index].name,
+                                                foundStudents[index]
+                                                    .fnamephone);
+                                            //refreshing the UI
+                                            //Closing the Alert Dialogue
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: const Text('Confirm'),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
+                                icon: const Icon(Icons.delete),
+                              ),
                             ],
                           ),
                         ),
