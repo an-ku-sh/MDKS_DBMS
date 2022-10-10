@@ -1,10 +1,69 @@
 //Dependencies
 import 'package:flutter/material.dart';
 import 'package:mdks/DataBaseBackend/json_api.dart';
-import 'package:mdks/ScaffoldPages/View_Update/student_info.dart';
 
 //Packages
 
+//
+List listOfPlaySchoolObjectParameters = [
+  'mname',
+  'admdt',
+  'fphone',
+  'mphone',
+  'admno',
+  'bldgrp',
+  'faadhar',
+  'maadhar',
+  'address',
+  'feeT1',
+  'feeT1Amt',
+  'feeT1Dt',
+  'feeT1Rno',
+  'feeT2',
+  'feeT2Amt',
+  'feeT2Dt',
+  'feeT2Rno',
+  'feeT3',
+  'feeT3Amt',
+  'feeT3Dt',
+  'feeT3Rno',
+  'feeT4',
+  'feeT4Amt',
+  'feeT4Dt',
+  'feeT4Rno',
+  'feeT5',
+  'feeT5Amt',
+  'feeT5Dt',
+  'feeT5Rno',
+  'feeT6',
+  'feeT6Amt',
+  'feeT6Dt',
+  'feeT6Rno',
+  'feeT7',
+  'feeT7Amt',
+  'feeT7Dt',
+  'feeT7Rno',
+  'feeT8',
+  'feeT8Amt',
+  'feeT8Dt',
+  'feeT8Rno',
+  'feeT9',
+  'feeT9Amt',
+  'feeT9Dt',
+  'feeT9Rno',
+  'feeT10',
+  'feeT10Amt',
+  'feeT10Dt',
+  'feeT10Rno',
+  'feeT11',
+  'feeT11Amt',
+  'feeT11Dt',
+  'feeT11Rno',
+  'feeT12',
+  'feeT12Amt',
+  'feeT12Dt',
+  'feeT12Rno'
+];
 // allStudents == a worksheet
 List allStudents = [];
 
@@ -69,6 +128,7 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
     setStudentList(selectedItem);
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.deepOrange.shade300,
         title: const Text('View Student Record'),
         actions: [
           Padding(
@@ -138,12 +198,127 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
                                       context: context,
                                       builder: (context) {
                                         return AlertDialog(
-                                          scrollable: true,
+                                          //scrollable: true,
                                           title: const Text('Student Info'),
-                                          content: studentInfoWidget(
-                                            selectedItem,
-                                            foundStudents[index],
-                                          ),
+                                          content:
+                                              //checking Worksheet Type
+                                              selectedItem
+                                                      .contains('playschool')
+                                                  //Playschool Type
+                                                  ? Container(
+                                                      color:
+                                                          Colors.amber.shade100,
+                                                      height: 800,
+                                                      width: 1100,
+                                                      child: Column(
+                                                        children: [
+                                                          //Student Name
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    left: 4),
+                                                            child: Container(
+                                                              alignment: Alignment
+                                                                  .centerLeft,
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .all(2),
+                                                              height: 40,
+                                                              width: 1100,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            5),
+                                                                color: Colors
+                                                                    .white54,
+                                                              ),
+                                                              child: Text(
+                                                                  'Student Name: ${foundStudents[index].name}'),
+                                                            ),
+                                                          ),
+                                                          //Fname/Phone
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    left: 4),
+                                                            child: Container(
+                                                              alignment: Alignment
+                                                                  .centerLeft,
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .all(2),
+                                                              height: 40,
+                                                              width: 1100,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            5),
+                                                                color: Colors
+                                                                    .white54,
+                                                              ),
+                                                              child: Text(
+                                                                  'Father\'s Name \\ Phone Number : ${foundStudents[index].fnamephone}'),
+                                                            ),
+                                                          ),
+                                                          //Editable Fields Dynamic
+                                                          Expanded(
+                                                            child: ListView
+                                                                .builder(
+                                                              itemCount:
+                                                                  listOfPlaySchoolObjectParameters
+                                                                      .length,
+                                                              itemBuilder:
+                                                                  (context,
+                                                                          index) =>
+                                                                      Card(
+                                                                elevation: 1,
+                                                                margin: const EdgeInsets
+                                                                        .symmetric(
+                                                                    vertical:
+                                                                        2),
+                                                                child: ListTile(
+                                                                  title: Text(
+                                                                      '${listOfPlaySchoolObjectParameters[index]}'),
+                                                                  trailing:
+                                                                      IconButton(
+                                                                          onPressed:
+                                                                              () {
+                                                                            showDialog(
+                                                                                context: context,
+                                                                                builder: (context) {
+                                                                                  return AlertDialog(
+                                                                                    title: Text('Edit ?? ${listOfPlaySchoolObjectParameters[index]}'),
+                                                                                  );
+                                                                                });
+                                                                          },
+                                                                          icon:
+                                                                              const Icon(Icons.edit_note_outlined)),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          )
+                                                        ],
+                                                      ),
+                                                    )
+                                                  //Genric Type
+                                                  : Container(
+                                                      height: 800,
+                                                      width: 1100,
+                                                      child: Column(
+                                                        children: [
+                                                          Container(
+                                                            color: Colors
+                                                                .greenAccent,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
                                         );
                                       },
                                     );
@@ -202,31 +377,20 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
- // trailing: IconButton(
-                          //     onPressed: () {
-                          // foundStudents[index].feeT1 =
-                          //     'debugFeeT1 has been paid';
-                          // print('changed debug parameters');
-                          // print(selectedItem);
-                          // writeJsonFile(
-                          //   selectedItem,
-                          //   foundStudents[index].name.toString(),
-                          //   foundStudents[index].fnamephone.toString(),
-                          //   foundStudents[index],
-                          // );
-                          // print(
-                          //   '${foundStudents[index].name.toString()} is modified',
-                          // );
-                          // },
-                          // icon: const Icon(Icons.info_rounded)),
+// trailing: IconButton(
+//     onPressed: () {
+// foundStudents[index].feeT1 =
+//     'debugFeeT1 has been paid';
+// print('changed debug parameters');
+// print(selectedItem);
+// writeJsonFile(
+//   selectedItem,
+//   foundStudents[index].name.toString(),
+//   foundStudents[index].fnamephone.toString(),
+//   foundStudents[index],
+// );
+// print(
+//   '${foundStudents[index].name.toString()} is modified',
+// );
+// },
+// icon: const Icon(Icons.info_rounded)),

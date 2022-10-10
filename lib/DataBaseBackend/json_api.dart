@@ -79,7 +79,7 @@ Future<List> returnJsonObjectList(String jsonFileName) async {
   }
 }
 
-writeJsonFile(
+updateStudentRecord(
   //Identifier Parameters
   String jsonFileName,
   String sname,
