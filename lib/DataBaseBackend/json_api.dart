@@ -56,7 +56,7 @@ initializeJsonAPI() async {
   //list of json files
 
   //setting default worksheet
-  List l2 = await returnJsonObjectList(listOfWorksheets[1]);
+  List l2 = await returnJsonObjectList(listOfWorksheets[0]);
   allStudents = l2;
   //list of  [Instance of 'PlaySchoolDataModel', Instance of 'PlaySchoolDataModel', Instance of 'PlaySchoolDataModel']
   //print(allStudents);
@@ -98,8 +98,8 @@ updateStudentRecord(
   int? indexOfDataObject;
   //Accessing the DataObject
   for (var j = 0; j < l.length; j++) {
-    if (l[j].name.toString() == sname &&
-        l[j].fnamephone.toString() == fnamephone) {
+    if (l[j].StudentName.toString() == sname &&
+        l[j].FatherNamePhone.toString() == fnamephone) {
       //The DataObject's index
       indexOfDataObject = j;
     }
@@ -130,11 +130,11 @@ createStudentRecord(
 
   if (jsonFileName.contains('playschool')) {
     PlaySchoolDataModel playSchoolDataModel =
-        PlaySchoolDataModel(name: sname, fnamephone: fnamephone);
+        PlaySchoolDataModel(StudentName: sname, FatherNamePhone: fnamephone);
     l.add(playSchoolDataModel);
   } else {
     GenericInstitute genericInstitute =
-        GenericInstitute(name: sname, fnamephone: fnamephone);
+        GenericInstitute(StudentName: sname, FatherNamePhone: fnamephone);
     l.add(genericInstitute);
   }
 
@@ -160,8 +160,8 @@ deleteStudentRecord(
 
   //Accessing the index of DataObject to be deleted
   for (var j = 0; j < l.length; j++) {
-    if (l[j].name.toString() == sname &&
-        l[j].fnamephone.toString() == fnamephone) {
+    if (l[j].StudentName.toString() == sname &&
+        l[j].FatherNamePhone.toString() == fnamephone) {
       //The DataObject's index
       indexOfDataObject = j;
     }

@@ -6,63 +6,63 @@ import 'package:mdks/DataBaseBackend/json_api.dart';
 
 //
 List listOfPlaySchoolObjectParameters = [
-  'mname',
-  'admdt',
-  'fphone',
-  'mphone',
-  'admno',
-  'bldgrp',
-  'faadhar',
-  'maadhar',
-  'address',
-  'feeT1',
-  'feeT1Amt',
-  'feeT1Dt',
-  'feeT1Rno',
-  'feeT2',
-  'feeT2Amt',
-  'feeT2Dt',
-  'feeT2Rno',
-  'feeT3',
-  'feeT3Amt',
-  'feeT3Dt',
-  'feeT3Rno',
-  'feeT4',
-  'feeT4Amt',
-  'feeT4Dt',
-  'feeT4Rno',
-  'feeT5',
-  'feeT5Amt',
-  'feeT5Dt',
-  'feeT5Rno',
-  'feeT6',
-  'feeT6Amt',
-  'feeT6Dt',
-  'feeT6Rno',
-  'feeT7',
-  'feeT7Amt',
-  'feeT7Dt',
-  'feeT7Rno',
-  'feeT8',
-  'feeT8Amt',
-  'feeT8Dt',
-  'feeT8Rno',
-  'feeT9',
-  'feeT9Amt',
-  'feeT9Dt',
-  'feeT9Rno',
-  'feeT10',
-  'feeT10Amt',
-  'feeT10Dt',
-  'feeT10Rno',
-  'feeT11',
-  'feeT11Amt',
-  'feeT11Dt',
-  'feeT11Rno',
-  'feeT12',
-  'feeT12Amt',
-  'feeT12Dt',
-  'feeT12Rno'
+  'MotherName',
+  'AdmissionDate',
+  'FatherPhone',
+  'MotherPhone',
+  'AdmissionNo',
+  'BloodGroup',
+  'FatherAadhar',
+  'MotherAadhar',
+  'Address',
+  'FeeTerm1',
+  'FeeAmountTerm1',
+  'FeePaymentDateTerm1',
+  'FeeReceiptNoTerm1',
+  'FeeTerm2',
+  'FeeAmountTerm2',
+  'FeePaymentDateTerm2',
+  'FeeReceiptNoTerm2',
+  'FeeTerm3',
+  'FeeAmountTerm3',
+  'FeePaymentDateTerm3',
+  'FeeReceiptNoTerm3',
+  'FeeTerm4',
+  'FeeAmountTerm4',
+  'FeePaymentDateTerm4',
+  'FeeReceiptNoTerm4',
+  'FeeTerm5',
+  'FeeAmountTerm5',
+  'FeePaymentDateTerm5',
+  'FeeReceiptNoTerm5',
+  'FeeTerm6',
+  'FeeAmountTerm6',
+  'FeePaymentDateTerm6',
+  'FeeReceiptNoTerm6',
+  'FeeTerm7',
+  'FeeAmountTerm7',
+  'FeePaymentDateTerm7',
+  'FeeReceiptNoTerm7',
+  'FeeTerm8',
+  'FeeAmountTerm8',
+  'FeePaymentDateTerm8',
+  'FeeReceiptNoTerm8',
+  'FeeTerm9',
+  'FeeAmountTerm9',
+  'FeePaymentDateTerm9',
+  'FeeReceiptNoTerm9',
+  'FeeTerm10',
+  'FeeAmountTerm10',
+  'FeePaymentDateTerm10',
+  'FeeReceiptNoTerm10',
+  'FeeTerm11',
+  'FeeAmountTerm11',
+  'FeePaymentDateTerm11',
+  'FeeReceiptNoTerm11',
+  'FeeTerm12',
+  'FeeAmountTerm12',
+  'FeePaymentDateTerm12',
+  'FeeReceiptNoTerm12',
 ];
 // allStudents == a worksheet
 List allStudents = [];
@@ -109,8 +109,7 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
       results = allStudents;
     } else {
       results = allStudents
-          .where((student) => student.name
-              .toString()
+          .where((student) => student.StudentName.toString()
               .toLowerCase()
               .contains(enteredKeyword.toLowerCase()))
           .toList();
@@ -125,7 +124,6 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
 
   @override
   Widget build(BuildContext context) {
-    setStudentList(selectedItem);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepOrange.shade300,
@@ -186,9 +184,10 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
                         elevation: 1,
                         margin: const EdgeInsets.symmetric(vertical: 2),
                         child: ListTile(
-                          title: Text(foundStudents[index].name.toString()),
-                          subtitle:
-                              Text(foundStudents[index].fnamephone.toString()),
+                          title:
+                              Text(foundStudents[index].StudentName.toString()),
+                          subtitle: Text(
+                              foundStudents[index].FatherNamePhone.toString()),
                           trailing: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
@@ -236,7 +235,7 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
                                                                     .white54,
                                                               ),
                                                               child: Text(
-                                                                  'Student Name: ${foundStudents[index].name}'),
+                                                                  'Student Name: ${foundStudents[index].StudentName}'),
                                                             ),
                                                           ),
                                                           //Fname/Phone
@@ -263,7 +262,7 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
                                                                     .white54,
                                                               ),
                                                               child: Text(
-                                                                  'Father\'s Name \\ Phone Number : ${foundStudents[index].fnamephone}'),
+                                                                  'Father\'s Name \\ Phone Number : ${foundStudents[index].FatherNamePhone}'),
                                                             ),
                                                           ),
                                                           //Editable Fields Dynamic
@@ -330,10 +329,11 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
                                     context: context,
                                     builder: (context) => AlertDialog(
                                       title: Text(
-                                          'Are Your Sure You Want to Delete ${foundStudents[index].name} from $selectedItem'),
+                                          'Are Your Sure You Want to Delete ${foundStudents[index].StudentName} from $selectedItem'),
                                       actions: [
                                         TextButton(
                                           onPressed: () {
+                                            setStudentList(selectedItem);
                                             Navigator.of(context).pop();
                                           },
                                           child: const Text('Cancel'),
@@ -343,10 +343,12 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
                                             //Deleting The Student Record
                                             deleteStudentRecord(
                                                 selectedItem,
-                                                foundStudents[index].name,
                                                 foundStudents[index]
-                                                    .fnamephone);
+                                                    .StudentName,
+                                                foundStudents[index]
+                                                    .FatherNamePhone);
                                             //refreshing the UI
+                                            // setStudentList(selectedItem);
                                             //Closing the Alert Dialogue
                                             Navigator.of(context).pop();
                                           },
