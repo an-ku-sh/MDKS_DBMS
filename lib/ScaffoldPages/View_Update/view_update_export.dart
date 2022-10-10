@@ -1,5 +1,6 @@
 //Dependencies
 import 'package:flutter/material.dart';
+import 'package:mdks/DataBaseBackend/DataModels/playschool_data.model.dart';
 import 'package:mdks/DataBaseBackend/json_api.dart';
 
 //Packages
@@ -296,14 +297,26 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
                                                                                   actions: [
                                                                                     TextButton(
                                                                                       onPressed: () {
-                                                                                        foundStudents[index].FeeTerm3 = 'deeebuggg';
-                                                                                        print(foundStudents[index].FeeTerm3);
+                                                                                        //print(foundStudents);
+                                                                                        //print(foundStudents[index].toJson());
+                                                                                        Map<String, dynamic> mapFromStudentObj = foundStudents[index].toJson();
+                                                                                        //print(mapFromStudentObj);
+                                                                                        mapFromStudentObj["${listOfPlaySchoolObjectParameters[i]}"] = fieldValueAfterUpdate;
+                                                                                        print(mapFromStudentObj["${listOfPlaySchoolObjectParameters[i]}"]);
+                                                                                        //converting map back to json
+                                                                                        PlaySchoolDataModel pplaySchoolDataModel = PlaySchoolDataModel.fromJson(mapFromStudentObj);
+                                                                                        print(pplaySchoolDataModel);
+                                                                                        //debug Update Test
+                                                                                        // foundStudents[index].FeeTerm3 = 'deeebuggg';
+
                                                                                         updateStudentRecord(
                                                                                           jsonFileName: selectedItem,
                                                                                           sname: foundStudents[index].StudentName,
                                                                                           fnamephone: foundStudents[index].FatherNamePhone,
-                                                                                          studentDataObject: foundStudents[index],
+                                                                                          studentDataObject: pplaySchoolDataModel,
                                                                                         );
+                                                                                        print(foundStudents[index].StudentName);
+                                                                                        Navigator.of(context).pop();
                                                                                       },
                                                                                       child: const Text(
                                                                                         'Submit',

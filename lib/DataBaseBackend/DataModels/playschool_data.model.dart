@@ -5,8 +5,8 @@ class PlaySchoolDataModel {
   String? FatherNamePhone;
   String? MotherName;
   String? AdmissionDate;
-  int? FatherPhone;
-  int? MotherPhone;
+  String? FatherPhone;
+  String? MotherPhone;
   String? AdmissionNo;
   String? BloodGroup;
   String? FatherAadhar;
@@ -14,64 +14,64 @@ class PlaySchoolDataModel {
   String? Address;
   //
   String? FeeTerm1;
-  int? FeeAmountTerm1;
+  String? FeeAmountTerm1;
   String? FeePaymentDateTerm1;
-  int? FeeReceiptNoTerm1;
+  String? FeeReceiptNoTerm1;
   //
   String? FeeTerm2;
-  int? FeeAmountTerm2;
+  String? FeeAmountTerm2;
   String? FeePaymentDateTerm2;
-  int? FeeReceiptNoTerm2;
+  String? FeeReceiptNoTerm2;
   //
   String? FeeTerm3;
-  int? FeeAmountTerm3;
+  String? FeeAmountTerm3;
   String? FeePaymentDateTerm3;
-  int? FeeReceiptNoTerm3;
+  String? FeeReceiptNoTerm3;
   //
   String? FeeTerm4;
-  int? FeeAmountTerm4;
+  String? FeeAmountTerm4;
   String? FeePaymentDateTerm4;
-  int? FeeReceiptNoTerm4;
+  String? FeeReceiptNoTerm4;
   //
   String? FeeTerm5;
-  int? FeeAmountTerm5;
+  String? FeeAmountTerm5;
   String? FeePaymentDateTerm5;
-  int? FeeReceiptNoTerm5;
+  String? FeeReceiptNoTerm5;
   //
   String? FeeTerm6;
-  int? FeeAmountTerm6;
+  String? FeeAmountTerm6;
   String? FeePaymentDateTerm6;
-  int? FeeReceiptNoTerm6;
+  String? FeeReceiptNoTerm6;
   //
   String? FeeTerm7;
-  int? FeeAmountTerm7;
+  String? FeeAmountTerm7;
   String? FeePaymentDateTerm7;
-  int? FeeReceiptNoTerm7;
+  String? FeeReceiptNoTerm7;
   //
   String? FeeTerm8;
-  int? FeeAmountTerm8;
+  String? FeeAmountTerm8;
   String? FeePaymentDateTerm8;
-  int? FeeReceiptNoTerm8;
+  String? FeeReceiptNoTerm8;
   //
   String? FeeTerm9;
-  int? FeeAmountTerm9;
+  String? FeeAmountTerm9;
   String? FeePaymentDateTerm9;
-  int? FeeReceiptNoTerm9;
+  String? FeeReceiptNoTerm9;
   //
   String? FeeTerm10;
-  int? FeeAmountTerm10;
+  String? FeeAmountTerm10;
   String? FeePaymentDateTerm10;
-  int? FeeReceiptNoTerm10;
+  String? FeeReceiptNoTerm10;
   //
   String? FeeTerm11;
-  int? FeeAmountTerm11;
+  String? FeeAmountTerm11;
   String? FeePaymentDateTerm11;
-  int? FeeReceiptNoTerm11;
+  String? FeeReceiptNoTerm11;
   //
   String? FeeTerm12;
-  int? FeeAmountTerm12;
+  String? FeeAmountTerm12;
   String? FeePaymentDateTerm12;
-  int? FeeReceiptNoTerm12;
+  String? FeeReceiptNoTerm12;
 
   PlaySchoolDataModel({
     required this.StudentName,
@@ -197,7 +197,7 @@ class PlaySchoolDataModel {
     FeeReceiptNoTerm12 = json['FeeReceiptNoTerm12'];
   }
 
-  Map<dynamic, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         'StudentName': StudentName,
         'FatherNamePhone': FatherNamePhone,
         'MotherName': MotherName,

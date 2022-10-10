@@ -108,6 +108,7 @@ updateStudentRecord(
   //writing change to List
   if (indexOfDataObject != null) {
     l[indexOfDataObject] = studentDataObject;
+    print('Student Data Onbject ${studentDataObject.StudentName} set ');
   }
 
   //Writing the entire list to the Json File as a string
