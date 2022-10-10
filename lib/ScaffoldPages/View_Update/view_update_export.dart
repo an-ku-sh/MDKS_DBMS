@@ -86,7 +86,7 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
                 onChanged: (item) => setState(
                   () {
                     selectedItem = item!;
-                    setStudentList(item);
+                    setStudentList(selectedItem);
                   },
                 ),
               ),
@@ -126,48 +126,71 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
                           title: Text(foundStudents[index].name.toString()),
                           subtitle:
                               Text(foundStudents[index].fnamephone.toString()),
-                          trailing: IconButton(
-                              onPressed: () {
-                                // foundStudents[index].feeT1 =
-                                //     'debugFeeT1 has been paid';
-                                // print('changed debug parameters');
-                                // print(selectedItem);
-                                // writeJsonFile(
-                                //   selectedItem,
-                                //   foundStudents[index].name.toString(),
-                                //   foundStudents[index].fnamephone.toString(),
-                                //   foundStudents[index],
-                                // );
-                                // print(
-                                //   '${foundStudents[index].name.toString()} is modified',
-                                // );
-                                setState(() {
-                                  deleteStudentRecord(
-                                      selectedItem,
-                                      foundStudents[index].name,
-                                      foundStudents[index].fnamephone);
-                                });
-                                // showDialog(
-                                //   context: context,
-                                //   builder: (context) {
-                                //     return AlertDialog(
-                                //       scrollable: true,
-                                //       title: const Text('Student Info'),
-                                //       content: studentInfoWidget(
-                                //         selectedItem,
-                                //         foundStudents[index],
-                                //       ),
-                                //     );
-                                //   },
-                                // );
-                              },
-                              icon: const Icon(Icons.info_rounded)),
+                          trailing: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              IconButton(
+                                  onPressed: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return AlertDialog(
+                                          scrollable: true,
+                                          title: const Text('Student Info'),
+                                          content: studentInfoWidget(
+                                            selectedItem,
+                                            foundStudents[index],
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  },
+                                  icon: const Icon(Icons.info_outline)),
+                              IconButton(
+                                  onPressed: () {
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return AlertDialog(
+                                            title: Text(
+                                                'Are Your Sure You Want to Delete ${foundStudents[index].name} from $selectedItem'),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                                child: const Text('Cancel'),
+                                              ),
+                                              TextButton(
+                                                onPressed: () {
+                                                  setState(() {
+                                                    deleteStudentRecord(
+                                                        selectedItem,
+                                                        foundStudents[index]
+                                                            .name,
+                                                        foundStudents[index]
+                                                            .fnamephone);
+                                                  });
+                                                  Navigator.of(context).pop();
+                                                  //refershing the UI
+                                                },
+                                                child: const Text('Confirm'),
+                                              ),
+                                            ],
+                                          );
+                                        });
+                                  },
+                                  icon: const Icon(Icons.delete)),
+                            ],
+                          ),
                         ),
                       ),
                     )
                   : const Text(
                       'No results Found',
-                      style: TextStyle(fontSize: 24),
+                      style: TextStyle(
+                        fontSize: 24,
+                      ),
                     ),
             ),
           ],
@@ -176,3 +199,32 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+ // trailing: IconButton(
+                          //     onPressed: () {
+                          // foundStudents[index].feeT1 =
+                          //     'debugFeeT1 has been paid';
+                          // print('changed debug parameters');
+                          // print(selectedItem);
+                          // writeJsonFile(
+                          //   selectedItem,
+                          //   foundStudents[index].name.toString(),
+                          //   foundStudents[index].fnamephone.toString(),
+                          //   foundStudents[index],
+                          // );
+                          // print(
+                          //   '${foundStudents[index].name.toString()} is modified',
+                          // );
+                          // },
+                          // icon: const Icon(Icons.info_rounded)),
