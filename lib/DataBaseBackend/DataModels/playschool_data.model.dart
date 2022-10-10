@@ -1,3 +1,5 @@
+void main() {}
+
 class PlaySchoolDataModel {
   String? StudentName;
   String? FatherNamePhone;

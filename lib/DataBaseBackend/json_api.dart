@@ -80,13 +80,13 @@ Future<List> returnJsonObjectList(String jsonFileName) async {
 }
 
 updateStudentRecord(
-  //Identifier Parameters
-  String jsonFileName,
-  String sname,
-  String fnamephone,
-  //Data Object
-  var dataObject,
-) async {
+    {
+    //Identifier Parameters
+    required String jsonFileName,
+    required String sname,
+    required String fnamephone,
+    //Data Object
+    var studentDataObject}) async {
   //Accessing the Json File/ Worksheet
   String dir = await returnJsonDirPath();
   File _file = File('$dir\\$jsonFileName');
@@ -105,9 +105,9 @@ updateStudentRecord(
     }
   }
 
-  //debug writing to the List[]
+  //writing change to List
   if (indexOfDataObject != null) {
-    l[indexOfDataObject] = dataObject;
+    l[indexOfDataObject] = studentDataObject;
   }
 
   //Writing the entire list to the Json File as a string

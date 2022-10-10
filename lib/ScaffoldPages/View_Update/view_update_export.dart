@@ -76,6 +76,8 @@ class ViewUpdateExport extends StatefulWidget {
 }
 
 class _ViewUpdateExportState extends State<ViewUpdateExport> {
+  //Update
+  var fieldValueAfterUpdate;
   //Drop Down
   String selectedItem = listOfWorksheets[0];
 
@@ -136,12 +138,7 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
               child: DropdownButtonFormField(
                 alignment: Alignment.centerLeft,
                 items: listOfWorksheets
-                    .map(
-                      (e) => DropdownMenuItem(
-                        value: e,
-                        child: Text(e),
-                      ),
-                    )
+                    .map((e) => DropdownMenuItem(value: e, child: Text(e)))
                     .toList(),
                 value: selectedItem,
                 onChanged: (item) => setState(
@@ -191,13 +188,13 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
                           trailing: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
+                              //The Icon Button that opens Student info
                               IconButton(
                                   onPressed: () {
                                     showDialog(
                                       context: context,
                                       builder: (context) {
                                         return AlertDialog(
-                                          //scrollable: true,
                                           title: const Text('Student Info'),
                                           content:
                                               //checking Worksheet Type
@@ -225,15 +222,13 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
                                                                       .all(2),
                                                               height: 40,
                                                               width: 1100,
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            5),
-                                                                color: Colors
-                                                                    .white54,
-                                                              ),
+                                                              decoration: BoxDecoration(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              5),
+                                                                  color: Colors
+                                                                      .white54),
                                                               child: Text(
                                                                   'Student Name: ${foundStudents[index].StudentName}'),
                                                             ),
@@ -274,7 +269,7 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
                                                                       .length,
                                                               itemBuilder:
                                                                   (context,
-                                                                          index) =>
+                                                                          i) =>
                                                                       Card(
                                                                 elevation: 1,
                                                                 margin: const EdgeInsets
@@ -283,18 +278,41 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
                                                                         2),
                                                                 child: ListTile(
                                                                   title: Text(
-                                                                      '${listOfPlaySchoolObjectParameters[index]}'),
+                                                                      '${listOfPlaySchoolObjectParameters[i]}'),
                                                                   trailing:
                                                                       IconButton(
                                                                           onPressed:
                                                                               () {
                                                                             showDialog(
-                                                                                context: context,
-                                                                                builder: (context) {
-                                                                                  return AlertDialog(
-                                                                                    title: Text('Edit ?? ${listOfPlaySchoolObjectParameters[index]}'),
-                                                                                  );
-                                                                                });
+                                                                              context: context,
+                                                                              builder: (context) {
+                                                                                return AlertDialog(
+                                                                                  title: Text('Edit ?? ${listOfPlaySchoolObjectParameters[i]}'),
+                                                                                  content: TextField(
+                                                                                    onChanged: (value) {
+                                                                                      fieldValueAfterUpdate = value;
+                                                                                    },
+                                                                                  ),
+                                                                                  actions: [
+                                                                                    TextButton(
+                                                                                      onPressed: () {
+                                                                                        foundStudents[index].FeeTerm3 = 'deeebuggg';
+                                                                                        print(foundStudents[index].FeeTerm3);
+                                                                                        updateStudentRecord(
+                                                                                          jsonFileName: selectedItem,
+                                                                                          sname: foundStudents[index].StudentName,
+                                                                                          fnamephone: foundStudents[index].FatherNamePhone,
+                                                                                          studentDataObject: foundStudents[index],
+                                                                                        );
+                                                                                      },
+                                                                                      child: const Text(
+                                                                                        'Submit',
+                                                                                      ),
+                                                                                    )
+                                                                                  ],
+                                                                                );
+                                                                              },
+                                                                            );
                                                                           },
                                                                           icon:
                                                                               const Icon(Icons.edit_note_outlined)),

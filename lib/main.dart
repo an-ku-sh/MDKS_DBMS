@@ -3,6 +3,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:window_manager/window_manager.dart';
 
 //Importing packages
+import 'DataBaseBackend/DataModels/playschool_data.model.dart';
 import 'fluent_home_page.dart';
 import './DataBaseBackend/json_api.dart';
 
@@ -28,7 +29,8 @@ void main() async {
   initializeJsonAPI();
 
   //debug
-
+  PlaySchoolDataModel playSchoolDataModel =
+      PlaySchoolDataModel(StudentName: 'awd', FatherNamePhone: 'fawda');
   //Executing  MyFluentApp()
   runApp(const MyFluentApp());
 }
