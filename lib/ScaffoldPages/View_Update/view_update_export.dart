@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:mdks/DataBaseBackend/DataModels/playschool_data.model.dart';
 import 'package:mdks/DataBaseBackend/json_api.dart';
+import 'package:mdks/ScaffoldPages/View_Update/pdf_api.dart';
+import 'package:mdks/ScaffoldPages/View_Update/pdf_invoice_api.dart';
 
 //Packages
 
@@ -82,12 +84,14 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
   //Drop Down
   String selectedItem = listOfWorksheets[0];
 
-  setStudentList(String jsonFileName) async {
+  void setStudentList(String jsonFileName) async {
     List l = await returnJsonObjectList(jsonFileName);
     if (mounted) {
       setState(() {
         allStudents = l;
         foundStudents = allStudents;
+        print(foundStudents);
+        print('set1');
       });
     }
   }
@@ -102,6 +106,7 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
   initState() {
     setStudentList(listOfWorksheets[0]);
     super.initState();
+    print('set2');
   }
 
   // This function is called whenever the text field changes
@@ -127,11 +132,15 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
 
   @override
   Widget build(BuildContext context) {
+    //inside Build
+    print('inside build');
+    //setStudentList(selectedItem);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepOrange.shade300,
         title: const Text('View Student Record'),
         actions: [
+          //The Drop Down Button
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: SizedBox(
@@ -153,6 +162,7 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
           ),
         ],
       ),
+      //The Search Bar
       body: Padding(
         padding: const EdgeInsets.all(10),
         child: Column(
@@ -174,6 +184,7 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
             const SizedBox(
               height: 20,
             ),
+            //The List Tile of Student Data Objects
             Expanded(
               child: foundStudents.isNotEmpty
                   ? ListView.builder(
@@ -192,11 +203,26 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
                               //The Icon Button that opens Student info
                               IconButton(
                                   onPressed: () {
+                                    Map<String, dynamic> mapObjFromStudentObj =
+                                        foundStudents[index].toJson();
                                     showDialog(
                                       context: context,
                                       builder: (context) {
                                         return AlertDialog(
                                           title: const Text('Student Info'),
+                                          actions: [
+                                            TextButton(
+                                                onPressed: () async {
+                                                  //Generating the invoice
+                                                  final pdfFile =
+                                                      await PdfInvoiceAPI
+                                                          .generatePdf(
+                                                              mapObjFromStudentObj);
+                                                  PdfApi.openFile(pdfFile); 
+                                                },
+                                                child: const Text(
+                                                    'Generate Invoice'))
+                                          ],
                                           content:
                                               //checking Worksheet Type
                                               selectedItem
@@ -279,7 +305,7 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
                                                                         2),
                                                                 child: ListTile(
                                                                   title: Text(
-                                                                      '${listOfPlaySchoolObjectParameters[i]}'),
+                                                                      '${listOfPlaySchoolObjectParameters[i]} : ${mapObjFromStudentObj["${listOfPlaySchoolObjectParameters[i]}"]}'),
                                                                   trailing:
                                                                       IconButton(
                                                                           onPressed:
@@ -297,25 +323,23 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
                                                                                   actions: [
                                                                                     TextButton(
                                                                                       onPressed: () {
-                                                                                        //print(foundStudents);
-                                                                                        //print(foundStudents[index].toJson());
-                                                                                        Map<String, dynamic> mapFromStudentObj = foundStudents[index].toJson();
-                                                                                        //print(mapFromStudentObj);
-                                                                                        mapFromStudentObj["${listOfPlaySchoolObjectParameters[i]}"] = fieldValueAfterUpdate;
-                                                                                        print(mapFromStudentObj["${listOfPlaySchoolObjectParameters[i]}"]);
-                                                                                        //converting map back to json
-                                                                                        PlaySchoolDataModel pplaySchoolDataModel = PlaySchoolDataModel.fromJson(mapFromStudentObj);
-                                                                                        print(pplaySchoolDataModel);
-                                                                                        //debug Update Test
-                                                                                        // foundStudents[index].FeeTerm3 = 'deeebuggg';
-
-                                                                                        updateStudentRecord(
-                                                                                          jsonFileName: selectedItem,
-                                                                                          sname: foundStudents[index].StudentName,
-                                                                                          fnamephone: foundStudents[index].FatherNamePhone,
-                                                                                          studentDataObject: pplaySchoolDataModel,
-                                                                                        );
-                                                                                        print(foundStudents[index].StudentName);
+                                                                                        setState(() {
+                                                                                          print('set3');
+                                                                                          mapObjFromStudentObj["${listOfPlaySchoolObjectParameters[i]}"] = fieldValueAfterUpdate;
+                                                                                          print(mapObjFromStudentObj["${listOfPlaySchoolObjectParameters[i]}"]);
+                                                                                          //converting map back to json
+                                                                                          PlaySchoolDataModel playSchoolDataModel = PlaySchoolDataModel.fromJson(mapObjFromStudentObj);
+                                                                                          print(playSchoolDataModel);
+                                                                                          //debug Update Test
+                                                                                          // foundStudents[index].FeeTerm3 = 'deeebuggg';
+                                                                                          updateStudentRecord(
+                                                                                            jsonFileName: selectedItem,
+                                                                                            sname: foundStudents[index].StudentName,
+                                                                                            fnamephone: foundStudents[index].FatherNamePhone,
+                                                                                            studentDataObject: playSchoolDataModel,
+                                                                                          );
+                                                                                          print(foundStudents[index].StudentName);
+                                                                                        });
                                                                                         Navigator.of(context).pop();
                                                                                       },
                                                                                       child: const Text(
@@ -358,7 +382,10 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
                                 onPressed: () {
                                   showDialog(
                                     context: context,
-                                    builder: (context) => AlertDialog(
+                                    builder: (context) =>
+                                        //StatefulBuilder(
+                                        //builder: (context, setState) =>
+                                        AlertDialog(
                                       title: Text(
                                           'Are Your Sure You Want to Delete ${foundStudents[index].StudentName} from $selectedItem'),
                                       actions: [
@@ -379,7 +406,10 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
                                                 foundStudents[index]
                                                     .FatherNamePhone);
                                             //refreshing the UI
-                                            // setStudentList(selectedItem);
+                                            setState(() {
+                                              setStudentList(selectedItem);
+                                              print('refresh');
+                                            });
                                             //Closing the Alert Dialogue
                                             Navigator.of(context).pop();
                                           },
@@ -388,6 +418,7 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
                                       ],
                                     ),
                                   );
+                                  // );
                                 },
                                 icon: const Icon(Icons.delete),
                               ),
@@ -409,21 +440,3 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
     );
   }
 }
-
-// trailing: IconButton(
-//     onPressed: () {
-// foundStudents[index].feeT1 =
-//     'debugFeeT1 has been paid';
-// print('changed debug parameters');
-// print(selectedItem);
-// writeJsonFile(
-//   selectedItem,
-//   foundStudents[index].name.toString(),
-//   foundStudents[index].fnamephone.toString(),
-//   foundStudents[index],
-// );
-// print(
-//   '${foundStudents[index].name.toString()} is modified',
-// );
-// },
-// icon: const Icon(Icons.info_rounded)),

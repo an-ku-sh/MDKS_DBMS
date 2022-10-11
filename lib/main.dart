@@ -44,7 +44,7 @@ class MyFluentApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'MDKS DataBase',
       darkTheme: ThemeData(
-        brightness: Brightness.dark,
+        brightness: Brightness.light,
         accentColor: Colors.orange,
       ),
       home: const FluentHomePage(),
