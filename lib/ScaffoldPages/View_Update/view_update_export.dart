@@ -1,76 +1,24 @@
 //Dependencies
 import 'package:flutter/material.dart';
-import 'package:mdks/DataBaseBackend/DataModels/playschool_data.model.dart';
-import 'package:mdks/DataBaseBackend/json_api.dart';
-import 'package:mdks/ScaffoldPages/View_Update/pdf_api.dart';
-import 'package:mdks/ScaffoldPages/View_Update/pdf_invoice_api.dart';
-
+import 'package:mdks/ScaffoldPages/View_Update/student_info.dart';
 //Packages
+import '../../DataBaseBackend/DataModels/generic_data_model.dart';
+import '../../DataBaseBackend/DataModels/playschool_data.model.dart';
+import '../../DataBaseBackend/json_api.dart';
+import '/ScaffoldPages/View_Update/pdf_api.dart';
+import '/ScaffoldPages/View_Update/pdf_invoice_api.dart';
 
-//
-List listOfPlaySchoolObjectParameters = [
-  'MotherName',
-  'AdmissionDate',
-  'FatherPhone',
-  'MotherPhone',
-  'AdmissionNo',
-  'BloodGroup',
-  'FatherAadhar',
-  'MotherAadhar',
-  'Address',
-  'FeeTerm1',
-  'FeeAmountTerm1',
-  'FeePaymentDateTerm1',
-  'FeeReceiptNoTerm1',
-  'FeeTerm2',
-  'FeeAmountTerm2',
-  'FeePaymentDateTerm2',
-  'FeeReceiptNoTerm2',
-  'FeeTerm3',
-  'FeeAmountTerm3',
-  'FeePaymentDateTerm3',
-  'FeeReceiptNoTerm3',
-  'FeeTerm4',
-  'FeeAmountTerm4',
-  'FeePaymentDateTerm4',
-  'FeeReceiptNoTerm4',
-  'FeeTerm5',
-  'FeeAmountTerm5',
-  'FeePaymentDateTerm5',
-  'FeeReceiptNoTerm5',
-  'FeeTerm6',
-  'FeeAmountTerm6',
-  'FeePaymentDateTerm6',
-  'FeeReceiptNoTerm6',
-  'FeeTerm7',
-  'FeeAmountTerm7',
-  'FeePaymentDateTerm7',
-  'FeeReceiptNoTerm7',
-  'FeeTerm8',
-  'FeeAmountTerm8',
-  'FeePaymentDateTerm8',
-  'FeeReceiptNoTerm8',
-  'FeeTerm9',
-  'FeeAmountTerm9',
-  'FeePaymentDateTerm9',
-  'FeeReceiptNoTerm9',
-  'FeeTerm10',
-  'FeeAmountTerm10',
-  'FeePaymentDateTerm10',
-  'FeeReceiptNoTerm10',
-  'FeeTerm11',
-  'FeeAmountTerm11',
-  'FeePaymentDateTerm11',
-  'FeeReceiptNoTerm11',
-  'FeeTerm12',
-  'FeeAmountTerm12',
-  'FeePaymentDateTerm12',
-  'FeeReceiptNoTerm12',
-];
+//Top Level Fields & Methods
+
 // allStudents == a worksheet
 List allStudents = [];
 
-//ViewUpdateExport(){}
+recallStudentInfo() {
+  print('recallStudentInfo called');
+  return StudentInfo();
+}
+
+//The Stateful Widget
 class ViewUpdateExport extends StatefulWidget {
   const ViewUpdateExport({super.key});
 
@@ -79,41 +27,22 @@ class ViewUpdateExport extends StatefulWidget {
 }
 
 class _ViewUpdateExportState extends State<ViewUpdateExport> {
-  //Update
-  var fieldValueAfterUpdate;
+  //class Level Fields / Methods
+
   //Drop Down
   String selectedItem = listOfWorksheets[0];
-
-  void setStudentList(String jsonFileName) async {
-    List l = await returnJsonObjectList(jsonFileName);
-    if (mounted) {
-      setState(() {
-        allStudents = l;
-        foundStudents = allStudents;
-        print(foundStudents);
-        print('set1');
-      });
-    }
-  }
 
   //Sorting
 
   // This list holds the data for the list view
   List foundStudents = [];
 
-  //init()
-  @override
-  initState() {
-    setStudentList(listOfWorksheets[0]);
-    super.initState();
-    print('set2');
-  }
-
   // This function is called whenever the text field changes
   void _runFilter(String enteredKeyword) {
     List results = [];
     if (enteredKeyword.isEmpty) {
-      // if the search field is empty or only contains white-space, we'll display all users
+      // if the search field is empty or only contains white-space,
+      //we'll display all users
       results = allStudents;
     } else {
       results = allStudents
@@ -130,10 +59,24 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
     });
   }
 
+  void setStudentList(String jsonFileName) async {
+    List l = await returnJsonObjectList(jsonFileName);
+    if (mounted) {
+      setState(() {
+        allStudents = l;
+        foundStudents = allStudents;
+      });
+    }
+  }
+
+  @override
+  initState() {
+    setStudentList(listOfWorksheets[0]);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    //inside Build
-    print('inside build');
     //setStudentList(selectedItem);
     return Scaffold(
       appBar: AppBar(
@@ -203,177 +146,16 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
                               //The Icon Button that opens Student info
                               IconButton(
                                   onPressed: () {
-                                    Map<String, dynamic> mapObjFromStudentObj =
-                                        foundStudents[index].toJson();
+                                    // Map<String, dynamic> mapObjFromStudentObj =
+                                    //     foundStudents[index].toJson();
                                     showDialog(
                                       context: context,
                                       builder: (context) {
-                                        return AlertDialog(
-                                          title: const Text('Student Info'),
-                                          actions: [
-                                            TextButton(
-                                                onPressed: () async {
-                                                  //Generating the invoice
-                                                  final pdfFile =
-                                                      await PdfInvoiceAPI
-                                                          .generatePdf(
-                                                              mapObjFromStudentObj);
-                                                  PdfApi.openFile(pdfFile); 
-                                                },
-                                                child: const Text(
-                                                    'Generate Invoice'))
-                                          ],
-                                          content:
-                                              //checking Worksheet Type
-                                              selectedItem
-                                                      .contains('playschool')
-                                                  //Playschool Type
-                                                  ? Container(
-                                                      color:
-                                                          Colors.amber.shade100,
-                                                      height: 800,
-                                                      width: 1100,
-                                                      child: Column(
-                                                        children: [
-                                                          //Student Name
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                        .only(
-                                                                    left: 4),
-                                                            child: Container(
-                                                              alignment: Alignment
-                                                                  .centerLeft,
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .all(2),
-                                                              height: 40,
-                                                              width: 1100,
-                                                              decoration: BoxDecoration(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              5),
-                                                                  color: Colors
-                                                                      .white54),
-                                                              child: Text(
-                                                                  'Student Name: ${foundStudents[index].StudentName}'),
-                                                            ),
-                                                          ),
-                                                          //Fname/Phone
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                        .only(
-                                                                    left: 4),
-                                                            child: Container(
-                                                              alignment: Alignment
-                                                                  .centerLeft,
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .all(2),
-                                                              height: 40,
-                                                              width: 1100,
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            5),
-                                                                color: Colors
-                                                                    .white54,
-                                                              ),
-                                                              child: Text(
-                                                                  'Father\'s Name \\ Phone Number : ${foundStudents[index].FatherNamePhone}'),
-                                                            ),
-                                                          ),
-                                                          //Editable Fields Dynamic
-                                                          Expanded(
-                                                            child: ListView
-                                                                .builder(
-                                                              itemCount:
-                                                                  listOfPlaySchoolObjectParameters
-                                                                      .length,
-                                                              itemBuilder:
-                                                                  (context,
-                                                                          i) =>
-                                                                      Card(
-                                                                elevation: 1,
-                                                                margin: const EdgeInsets
-                                                                        .symmetric(
-                                                                    vertical:
-                                                                        2),
-                                                                child: ListTile(
-                                                                  title: Text(
-                                                                      '${listOfPlaySchoolObjectParameters[i]} : ${mapObjFromStudentObj["${listOfPlaySchoolObjectParameters[i]}"]}'),
-                                                                  trailing:
-                                                                      IconButton(
-                                                                          onPressed:
-                                                                              () {
-                                                                            showDialog(
-                                                                              context: context,
-                                                                              builder: (context) {
-                                                                                return AlertDialog(
-                                                                                  title: Text('Edit ?? ${listOfPlaySchoolObjectParameters[i]}'),
-                                                                                  content: TextField(
-                                                                                    onChanged: (value) {
-                                                                                      fieldValueAfterUpdate = value;
-                                                                                    },
-                                                                                  ),
-                                                                                  actions: [
-                                                                                    TextButton(
-                                                                                      onPressed: () {
-                                                                                        setState(() {
-                                                                                          print('set3');
-                                                                                          mapObjFromStudentObj["${listOfPlaySchoolObjectParameters[i]}"] = fieldValueAfterUpdate;
-                                                                                          print(mapObjFromStudentObj["${listOfPlaySchoolObjectParameters[i]}"]);
-                                                                                          //converting map back to json
-                                                                                          PlaySchoolDataModel playSchoolDataModel = PlaySchoolDataModel.fromJson(mapObjFromStudentObj);
-                                                                                          print(playSchoolDataModel);
-                                                                                          //debug Update Test
-                                                                                          // foundStudents[index].FeeTerm3 = 'deeebuggg';
-                                                                                          updateStudentRecord(
-                                                                                            jsonFileName: selectedItem,
-                                                                                            sname: foundStudents[index].StudentName,
-                                                                                            fnamephone: foundStudents[index].FatherNamePhone,
-                                                                                            studentDataObject: playSchoolDataModel,
-                                                                                          );
-                                                                                          print(foundStudents[index].StudentName);
-                                                                                        });
-                                                                                        Navigator.of(context).pop();
-                                                                                      },
-                                                                                      child: const Text(
-                                                                                        'Submit',
-                                                                                      ),
-                                                                                    )
-                                                                                  ],
-                                                                                );
-                                                                              },
-                                                                            );
-                                                                          },
-                                                                          icon:
-                                                                              const Icon(Icons.edit_note_outlined)),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          )
-                                                        ],
-                                                      ),
-                                                    )
-                                                  //Genric Type
-                                                  : Container(
-                                                      height: 800,
-                                                      width: 1100,
-                                                      child: Column(
-                                                        children: [
-                                                          Container(
-                                                            color: Colors
-                                                                .greenAccent,
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                        );
+                                        worksheetName = selectedItem;
+                                        studentDataModelObject =
+                                            foundStudents[index];
+                                        print(foundStudents[index].StudentName);
+                                        return const StudentInfo();
                                       },
                                     );
                                   },
@@ -406,10 +188,7 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
                                                 foundStudents[index]
                                                     .FatherNamePhone);
                                             //refreshing the UI
-                                            setState(() {
-                                              setStudentList(selectedItem);
-                                              print('refresh');
-                                            });
+
                                             //Closing the Alert Dialogue
                                             Navigator.of(context).pop();
                                           },
