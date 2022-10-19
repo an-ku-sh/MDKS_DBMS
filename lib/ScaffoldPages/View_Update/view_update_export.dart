@@ -130,11 +130,15 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
     });
   }
 
+  refreshUI(List updatedStudentList) async {
+    setState(() {
+      foundStudents = updatedStudentList;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     //inside Build
-    //print('inside build');
-    //setStudentList(selectedItem);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepOrange.shade300,
@@ -203,7 +207,6 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
                               //The Icon Button that opens Student info
                               IconButton(
                                   onPressed: () {
-                                    print('zuzuzu ${foundStudents[index]}');
                                     Map<String, dynamic> mapObjFromStudentObj =
                                         foundStudents[index].toJson();
                                     showDialog(
@@ -324,23 +327,16 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
                                                                                   actions: [
                                                                                     TextButton(
                                                                                       onPressed: () {
-                                                                                        setState(() {
-                                                                                          //print('set3');
-                                                                                          mapObjFromStudentObj["${listOfPlaySchoolObjectParameters[i]}"] = fieldValueAfterUpdate;
-                                                                                          //print(mapObjFromStudentObj["${listOfPlaySchoolObjectParameters[i]}"]);
-                                                                                          //converting map back to json
-                                                                                          PlaySchoolDataModel playSchoolDataModel = PlaySchoolDataModel.fromJson(mapObjFromStudentObj);
-                                                                                          //print(playSchoolDataModel);
-                                                                                          //debug Update Test
-                                                                                          // foundStudents[index].FeeTerm3 = 'deeebuggg';
-                                                                                          updateStudentRecord(
-                                                                                            jsonFileName: selectedItem,
-                                                                                            sname: foundStudents[index].StudentName,
-                                                                                            fnamephone: foundStudents[index].FatherNamePhone,
-                                                                                            studentDataObject: playSchoolDataModel,
-                                                                                          );
-                                                                                          //print(foundStudents[index].StudentName);
-                                                                                        });
+                                                                                        //making the change
+                                                                                        mapObjFromStudentObj["${listOfPlaySchoolObjectParameters[i]}"] = fieldValueAfterUpdate;
+                                                                                        //converting the updated map back to json
+                                                                                        PlaySchoolDataModel playSchoolDataModel = PlaySchoolDataModel.fromJson(mapObjFromStudentObj);
+                                                                                        updateStudentRecord(
+                                                                                          jsonFileName: selectedItem,
+                                                                                          sname: foundStudents[index].StudentName,
+                                                                                          fnamephone: foundStudents[index].FatherNamePhone,
+                                                                                          studentDataObject: playSchoolDataModel,
+                                                                                        );
                                                                                         Navigator.of(context).pop();
                                                                                       },
                                                                                       child: const Text(
@@ -398,20 +394,16 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
                                           child: const Text('Cancel'),
                                         ),
                                         TextButton(
-                                          onPressed: () {
+                                          onPressed: () async {
                                             //Deleting The Student Record
-                                            deleteStudentRecord(
-                                                selectedItem,
-                                                foundStudents[index]
-                                                    .StudentName,
-                                                foundStudents[index]
-                                                    .FatherNamePhone);
-                                            //refreshing the UI
-                                            setState(() {
-                                              setStudentList(selectedItem);
-                                              //print('refresh');
-                                            });
-                                            //Closing the Alert Dialogue
+                                            List updatedList =
+                                                await deleteStudentRecord(
+                                                    selectedItem,
+                                                    foundStudents[index]
+                                                        .StudentName,
+                                                    foundStudents[index]
+                                                        .FatherNamePhone);
+                                            refreshUI(updatedList);
                                             Navigator.of(context).pop();
                                           },
                                           child: const Text('Confirm'),

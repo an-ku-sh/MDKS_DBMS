@@ -175,4 +175,8 @@ deleteStudentRecord(
 
   //Writing the entire list to the Json File as a string
   await _file.writeAsString(json.encode(l));
+
+  //returning the updated file
+  List l3 = await returnJsonObjectList(jsonFileName);
+  return l3;
 }
