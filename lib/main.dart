@@ -29,8 +29,7 @@ void main() async {
   initializeJsonAPI();
 
   //debug
-  PlaySchoolDataModel playSchoolDataModel =
-      PlaySchoolDataModel(StudentName: 'awd', FatherNamePhone: 'fawda');
+
   //Executing  MyFluentApp()
   runApp(const MyFluentApp());
 }

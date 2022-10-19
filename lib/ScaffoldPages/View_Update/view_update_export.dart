@@ -90,8 +90,8 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
       setState(() {
         allStudents = l;
         foundStudents = allStudents;
-        print(foundStudents);
-        print('set1');
+        //print(foundStudents);
+        //print('set1');
       });
     }
   }
@@ -106,7 +106,7 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
   initState() {
     setStudentList(listOfWorksheets[0]);
     super.initState();
-    print('set2');
+    //print('set2');
   }
 
   // This function is called whenever the text field changes
@@ -133,7 +133,7 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
   @override
   Widget build(BuildContext context) {
     //inside Build
-    print('inside build');
+    //print('inside build');
     //setStudentList(selectedItem);
     return Scaffold(
       appBar: AppBar(
@@ -203,6 +203,7 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
                               //The Icon Button that opens Student info
                               IconButton(
                                   onPressed: () {
+                                    print('zuzuzu ${foundStudents[index]}');
                                     Map<String, dynamic> mapObjFromStudentObj =
                                         foundStudents[index].toJson();
                                     showDialog(
@@ -218,7 +219,7 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
                                                       await PdfInvoiceAPI
                                                           .generatePdf(
                                                               mapObjFromStudentObj);
-                                                  PdfApi.openFile(pdfFile); 
+                                                  PdfApi.openFile(pdfFile);
                                                 },
                                                 child: const Text(
                                                     'Generate Invoice'))
@@ -324,12 +325,12 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
                                                                                     TextButton(
                                                                                       onPressed: () {
                                                                                         setState(() {
-                                                                                          print('set3');
+                                                                                          //print('set3');
                                                                                           mapObjFromStudentObj["${listOfPlaySchoolObjectParameters[i]}"] = fieldValueAfterUpdate;
-                                                                                          print(mapObjFromStudentObj["${listOfPlaySchoolObjectParameters[i]}"]);
+                                                                                          //print(mapObjFromStudentObj["${listOfPlaySchoolObjectParameters[i]}"]);
                                                                                           //converting map back to json
                                                                                           PlaySchoolDataModel playSchoolDataModel = PlaySchoolDataModel.fromJson(mapObjFromStudentObj);
-                                                                                          print(playSchoolDataModel);
+                                                                                          //print(playSchoolDataModel);
                                                                                           //debug Update Test
                                                                                           // foundStudents[index].FeeTerm3 = 'deeebuggg';
                                                                                           updateStudentRecord(
@@ -338,7 +339,7 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
                                                                                             fnamephone: foundStudents[index].FatherNamePhone,
                                                                                             studentDataObject: playSchoolDataModel,
                                                                                           );
-                                                                                          print(foundStudents[index].StudentName);
+                                                                                          //print(foundStudents[index].StudentName);
                                                                                         });
                                                                                         Navigator.of(context).pop();
                                                                                       },
@@ -408,7 +409,7 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
                                             //refreshing the UI
                                             setState(() {
                                               setStudentList(selectedItem);
-                                              print('refresh');
+                                              //print('refresh');
                                             });
                                             //Closing the Alert Dialogue
                                             Navigator.of(context).pop();
