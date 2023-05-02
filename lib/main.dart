@@ -15,8 +15,12 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await windowManager.ensureInitialized();
   windowManager.waitUntilReadyToShow().then((_) async {
-    await windowManager.setTitle('MDKS DataBase');
-    await windowManager.setTitleBarStyle(TitleBarStyle.normal);
+    await windowManager.setTitle('MDKS');
+    await windowManager.setBrightness(Brightness.dark);
+    await windowManager.setTitleBarStyle(
+      TitleBarStyle.normal,
+      // windowButtonVisibility: false,
+    );
     await windowManager.setBackgroundColor(Colors.transparent);
     // await windowManager.setSize(const Size(555, 345));
     // await windowManager.setMinimumSize(const Size(555, 345));
@@ -40,11 +44,10 @@ class MyFluentApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FluentApp(
+      themeMode: ThemeMode.dark,
       debugShowCheckedModeBanner: false,
-      title: 'MDKS DataBase',
-      darkTheme: ThemeData(
-        brightness: Brightness.light,
-        accentColor: Colors.orange,
+      darkTheme: FluentThemeData(
+        brightness: Brightness.dark,
       ),
       home: const FluentHomePage(),
     );

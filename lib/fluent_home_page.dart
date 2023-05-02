@@ -67,11 +67,19 @@ class _FluentHomePageState extends State<FluentHomePage> with WindowListener {
     //super.onWindowClose();
   }
 
+  List appBarTitles = [
+    'MDKS Home',
+    'View Student Record',
+    'Create Student Record',
+    'Financial Records'
+  ];
   //
   @override
   Widget build(BuildContext context) {
     return NavigationView(
-      // appBar: const NavigationAppBar(),
+      appBar: const NavigationAppBar(
+        title: Text('DataBase Management System'),
+      ),
       key: viewKey,
       pane: NavigationPane(
         selected: _currentindex,
@@ -83,27 +91,25 @@ class _FluentHomePageState extends State<FluentHomePage> with WindowListener {
         displayMode: PaneDisplayMode.compact,
         items: [
           PaneItem(
+              body: const MDKSHome(),
               icon: const Icon(FluentIcons.home_solid),
               title: const Text('MDKS Home')),
+          PaneItemSeparator(),
           PaneItem(
+              body: const ViewUpdateExport(),
               icon: const Icon(FluentIcons.contact_info_mirrored),
               title: const Text('View Student Record')),
+          // PaneItemSeparator(),
           PaneItem(
+              body: const CreateAppend(),
               icon: const Icon(FluentIcons.edit_contact),
               title: const Text('Create Student Record')),
+          // PaneItemSeparator(),
           PaneItem(
+              body: const FinancialRecords(),
               icon: const Icon(FluentIcons.circle_dollar),
               title: const Text('Financial Records')),
-        ],
-      ),
-      content: NavigationBody(
-        index: _currentindex,
-        /* the no of children should match the no of Navigation Pane Items */
-        children: const [
-          MDKSHome(),
-          ViewUpdateExport(),
-          CreateAppend(),
-          FinancialRecords(),
+          PaneItemSeparator(),
         ],
       ),
     );

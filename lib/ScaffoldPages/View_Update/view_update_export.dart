@@ -79,7 +79,7 @@ class ViewUpdateExport extends StatefulWidget {
 }
 
 class _ViewUpdateExportState extends State<ViewUpdateExport> {
-  //Update
+  // //Update
   var fieldValueAfterUpdate;
   //Drop Down
   String selectedItem = listOfWorksheets[0];
@@ -96,9 +96,9 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
     }
   }
 
-  //Sorting
+  // //Sorting
 
-  // This list holds the data for the list view
+  // // This list holds the data for the list view
   List foundStudents = [];
 
   //init()
@@ -109,7 +109,7 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
     //print('set2');
   }
 
-  // This function is called whenever the text field changes
+  // // This function is called whenever the text field changes
   void _runFilter(String enteredKeyword) {
     List results = [];
     if (enteredKeyword.isEmpty) {
@@ -166,7 +166,7 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
           ),
         ],
       ),
-      //The Search Bar
+      // The Search Bar
       body: Padding(
         padding: const EdgeInsets.all(10),
         child: Column(

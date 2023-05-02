@@ -12,11 +12,10 @@ class _MDKSHomeState extends State<MDKSHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('MDKS Home'),
-      ),
-      body: 
-      Container(
+      // appBar: AppBar(
+      //   title: const Text('MDKS Home'),
+      // ),
+      body: Container(
         child: Center(
             child: Image.asset(
           'lib/IMG/IMG1.jpg',
