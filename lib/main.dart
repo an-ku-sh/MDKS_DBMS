@@ -18,8 +18,8 @@ void main() async {
     await windowManager.setTitle('MDKS DataBase');
     await windowManager.setTitleBarStyle(TitleBarStyle.normal);
     await windowManager.setBackgroundColor(Colors.transparent);
-    await windowManager.setSize(const Size(555, 345));
-    await windowManager.setMinimumSize(const Size(555, 345));
+    // await windowManager.setSize(const Size(555, 345));
+    // await windowManager.setMinimumSize(const Size(555, 345));
     await windowManager.center();
     await windowManager.show();
     await windowManager.setSkipTaskbar(false);

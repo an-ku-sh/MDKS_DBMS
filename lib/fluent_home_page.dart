@@ -71,14 +71,16 @@ class _FluentHomePageState extends State<FluentHomePage> with WindowListener {
   @override
   Widget build(BuildContext context) {
     return NavigationView(
-      appBar: const NavigationAppBar(),
+      // appBar: const NavigationAppBar(),
       key: viewKey,
       pane: NavigationPane(
         selected: _currentindex,
-        onChanged: (i) => setState(() {
-          _currentindex = i;
-        }),
-        displayMode: PaneDisplayMode.open,
+        onChanged: (i) => setState(
+          () {
+            _currentindex = i;
+          },
+        ),
+        displayMode: PaneDisplayMode.compact,
         items: [
           PaneItem(
               icon: const Icon(FluentIcons.home_solid),

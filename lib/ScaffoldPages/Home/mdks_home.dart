@@ -15,7 +15,8 @@ class _MDKSHomeState extends State<MDKSHome> {
       appBar: AppBar(
         title: const Text('MDKS Home'),
       ),
-      body: Container(
+      body: 
+      Container(
         child: Center(
             child: Image.asset(
           'lib/IMG/IMG1.jpg',
