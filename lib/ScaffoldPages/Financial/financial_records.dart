@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../DataBaseBackend/json_api.dart';
 
@@ -58,7 +59,13 @@ class _FinancialRecordsState extends State<FinancialRecords> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Financial Records'),
+        title: Text(
+          'Financial Records',
+          style: GoogleFonts.adventPro(
+            fontWeight: FontWeight.bold,
+            fontSize: 30,
+          ),
+        ),
         actions: [
           //The Drop Down Button
           Padding(

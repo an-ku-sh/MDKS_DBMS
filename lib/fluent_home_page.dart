@@ -1,5 +1,6 @@
 //Importing Dependencies
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:window_manager/window_manager.dart';
 
 //Importing Navigation Pages
@@ -77,8 +78,11 @@ class _FluentHomePageState extends State<FluentHomePage> with WindowListener {
   @override
   Widget build(BuildContext context) {
     return NavigationView(
-      appBar: const NavigationAppBar(
-        title: Text('DataBase Management System'),
+      appBar: NavigationAppBar(
+        title: Text(
+          'DataBase Management System',
+          style: GoogleFonts.acme(fontSize: 20),
+        ),
       ),
       key: viewKey,
       pane: NavigationPane(

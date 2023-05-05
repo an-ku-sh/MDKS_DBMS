@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class MDKSHome extends StatefulWidget {
   const MDKSHome({Key? key}) : super(key: key);
@@ -15,14 +16,36 @@ class _MDKSHomeState extends State<MDKSHome> {
       // appBar: AppBar(
       //   title: const Text('MDKS Home'),
       // ),
-      body: Container(
-        child: Center(
-            child: Image.asset(
-          'lib/IMG/IMG1.jpg',
-          height: 1080,
-          width: 1920,
-          fit: BoxFit.cover,
-        )),
+      body: Column(
+        children: [
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 28.0),
+              child: SizedBox(
+                height: 200,
+                width: 500,
+                child: Center(
+                  child: Image.asset(
+                    'lib/IMG/mdks.png',
+                    // height: 1080,
+                    // width: 1920,
+                    // fit: BoxFit.contain,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 400,
+            child:
+                // LottieBuilder.asset(
+                //   'lib/IMG/ksfh.json',
+                // )
+                LottieBuilder.network(
+              'https://assets4.lottiefiles.com/packages/lf20_sknsem5j.json',
+            ),
+          )
+        ],
       ),
     );
   }

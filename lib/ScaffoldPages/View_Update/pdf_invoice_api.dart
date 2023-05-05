@@ -8,6 +8,7 @@ import 'package:pdf/widgets.dart';
 class PdfInvoiceAPI {
   //Method to generate PDF
   static Future<File> generatePdf(Map<String, dynamic> studentDataMap) async {
+    print('generate pdf called');
     final pdf = Document();
     PdfPageFormat.a4;
     final mdksLogoImage =

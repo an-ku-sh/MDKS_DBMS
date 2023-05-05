@@ -1,5 +1,6 @@
 //Dependencies
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:mdks/DataBaseBackend/DataModels/playschool_data.model.dart';
 import 'package:mdks/DataBaseBackend/json_api.dart';
 import 'package:mdks/ScaffoldPages/View_Update/pdf_api.dart';
@@ -141,18 +142,49 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
     //inside Build
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.deepOrange.shade300,
-        title: const Text('View Student Record'),
+        toolbarHeight: 70,
+        // backgroundColor: Colors.deepOrange.shade300,
+        title: Text(
+          'Student Record',
+          style: GoogleFonts.adventPro(
+            fontWeight: FontWeight.bold,
+            fontSize: 35,
+          ),
+        ),
         actions: [
           //The Drop Down Button
           Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SizedBox(
+            padding:
+                const EdgeInsets.only(left: 7, right: 37, top: 7, bottom: 7),
+            child: Container(
+              color: Colors.black12,
               width: 240,
+              height: 50,
               child: DropdownButtonFormField(
+                dropdownColor: Colors.grey.shade800,
+                decoration: const InputDecoration(
+                  filled: true,
+                  fillColor: Colors.black12,
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.amberAccent, width: 2),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.amberAccent, width: 2),
+                  ),
+                ),
+                elevation: 8,
+                icon: const Icon(Icons.arrow_drop_down_sharp),
                 alignment: Alignment.centerLeft,
                 items: listOfWorksheets
-                    .map((e) => DropdownMenuItem(value: e, child: Text(e)))
+                    .map(
+                      (e) => DropdownMenuItem(
+                        value: e,
+                        child: Text(
+                          e.substring(0, e.indexOf('.')).toUpperCase(),
+                          style: GoogleFonts.ubuntuCondensed(),
+                        ),
+                      ),
+                    )
                     .toList(),
                 value: selectedItem,
                 onChanged: (item) => setState(
@@ -194,6 +226,7 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
                   ? ListView.builder(
                       itemCount: foundStudents.length,
                       itemBuilder: (context, index) => Card(
+                        color: Colors.black12,
                         elevation: 1,
                         margin: const EdgeInsets.symmetric(vertical: 2),
                         child: ListTile(
