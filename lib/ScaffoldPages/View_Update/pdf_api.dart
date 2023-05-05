@@ -10,12 +10,14 @@ class PdfApi {
     final bytes = await pdf.save();
     final dir = await getApplicationDocumentsDirectory();
     final file = File('${dir.path}/$name');
+    print(file.toString());
     await file.writeAsBytes(bytes);
     return file;
   }
 
   static Future openFile(File file) async {
     final url = file.path;
+    print(url);
     await OpenFile.open(url);
   }
 }

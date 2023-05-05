@@ -26,7 +26,7 @@ class _CreateAppendState extends State<CreateAppend> {
           'Institutes',
           style: GoogleFonts.adventPro(
             fontWeight: FontWeight.bold,
-            fontSize: 30,
+            fontSize: 35,
           ),
         ),
       ),
@@ -36,13 +36,15 @@ class _CreateAppendState extends State<CreateAppend> {
             child: ListView.builder(
               itemCount: listOfWorksheets.length,
               itemBuilder: (context, index) => Card(
+                color: Colors.black12,
                 elevation: 1,
-                margin: const EdgeInsets.symmetric(vertical: 6),
+                margin: const EdgeInsets.all(8),
                 child: ListTile(
                   title: Text(listOfWorksheets[index]
                       .toString()
                       //removing .json from Worksheet name
-                      .substring(0, listOfWorksheets[index].indexOf('.'))),
+                      .substring(0, listOfWorksheets[index].indexOf('.'))
+                      .toUpperCase()),
                   trailing: IconButton(
                       onPressed: () {
                         String? sname;
@@ -51,8 +53,9 @@ class _CreateAppendState extends State<CreateAppend> {
                             context: context,
                             builder: (context) {
                               return AlertDialog(
+                                // backgroundColor: Colors.black12 ,
                                 title: Text(
-                                    'Add Student Record in ${listOfWorksheets[index]}'),
+                                    'Add Student Record in ${listOfWorksheets[index].substring(0, listOfWorksheets[index].indexOf('.')).toUpperCase()}'),
                                 actions: [
                                   Padding(
                                     padding: const EdgeInsets.all(20.0),
@@ -86,20 +89,27 @@ class _CreateAppendState extends State<CreateAppend> {
                                     ),
                                   ),
                                   TextButton(
-                                      onPressed: () {
-                                        if (sname != null &&
-                                            sname != '' &&
-                                            fnamePhone != null &&
-                                            fnamePhone != '') {
-                                          createStudentRecord(
-                                            listOfWorksheets[index],
-                                            sname!,
-                                            fnamePhone!,
-                                          );
-                                          Navigator.of(context).pop();
-                                        }
-                                      },
-                                      child: const Text('Submit'))
+                                    onPressed: () {
+                                      if (sname != null &&
+                                          sname != '' &&
+                                          fnamePhone != null &&
+                                          fnamePhone != '') {
+                                        createStudentRecord(
+                                          listOfWorksheets[index],
+                                          sname!,
+                                          fnamePhone!,
+                                        );
+                                        Navigator.of(context).pop();
+                                      }
+                                    },
+                                    child: Text(
+                                      'Submit',
+                                      style: GoogleFonts.ubuntuCondensed(
+                                        fontStyle: FontStyle.italic,
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                  )
                                 ],
                               );
                             });

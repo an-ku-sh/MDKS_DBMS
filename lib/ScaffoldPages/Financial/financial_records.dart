@@ -58,24 +58,47 @@ class _FinancialRecordsState extends State<FinancialRecords> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // backgroundColor: Colors.black12,
       appBar: AppBar(
+        toolbarHeight: 70,
         title: Text(
           'Financial Records',
           style: GoogleFonts.adventPro(
             fontWeight: FontWeight.bold,
-            fontSize: 30,
+            fontSize: 35,
           ),
         ),
         actions: [
           //The Drop Down Button
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding:
+                const EdgeInsets.only(left: 7, right: 37, top: 7, bottom: 7),
             child: SizedBox(
               width: 240,
+              height: 50,
               child: DropdownButtonFormField(
-                alignment: Alignment.centerLeft,
+                dropdownColor: Colors.grey.shade800,
+                decoration: const InputDecoration(
+                  filled: true,
+                  fillColor: Colors.black12,
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.amberAccent, width: 2),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.amberAccent, width: 2),
+                  ),
+                ),
+                elevation: 8,
+                // alignment: Alignment.centerLeft,
                 items: listOfInstitutes
-                    .map((e) => DropdownMenuItem(value: e, child: Text(e)))
+                    .map(
+                      (e) => DropdownMenuItem(
+                        value: e,
+                        child: Text(
+                          e.toUpperCase(),
+                        ),
+                      ),
+                    )
                     .toList(),
                 value: selectedInstitute,
                 onChanged: (item) => setState(
@@ -88,10 +111,24 @@ class _FinancialRecordsState extends State<FinancialRecords> {
           ),
           //The Drop Down Button
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding:
+                const EdgeInsets.only(left: 7, right: 37, top: 7, bottom: 7),
             child: SizedBox(
               width: 240,
+              height: 50,
               child: DropdownButtonFormField(
+                dropdownColor: Colors.grey.shade800,
+                decoration: const InputDecoration(
+                  filled: true,
+                  fillColor: Colors.black12,
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.amberAccent, width: 2),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.amberAccent, width: 2),
+                  ),
+                ),
+                elevation: 8,
                 alignment: Alignment.centerLeft,
                 items: listOfFeeTerms
                     .map((e) => DropdownMenuItem(value: e, child: Text(e)))
@@ -133,7 +170,7 @@ class _FinancialRecordsState extends State<FinancialRecords> {
                 ),
               ],
             )
-          : const Text('Not Found'),
+          : const Text(''),
     );
   }
 }

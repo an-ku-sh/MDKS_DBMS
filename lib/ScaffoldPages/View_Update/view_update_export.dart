@@ -228,7 +228,7 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
                       itemBuilder: (context, index) => Card(
                         color: Colors.black12,
                         elevation: 1,
-                        margin: const EdgeInsets.symmetric(vertical: 2),
+                        margin: const EdgeInsets.all(5),
                         child: ListTile(
                           title:
                               Text(foundStudents[index].StudentName.toString()),
@@ -239,175 +239,175 @@ class _ViewUpdateExportState extends State<ViewUpdateExport> {
                             children: [
                               //The Icon Button that opens Student info
                               IconButton(
-                                  onPressed: () {
-                                    Map<String, dynamic> mapObjFromStudentObj =
-                                        foundStudents[index].toJson();
-                                    showDialog(
-                                      context: context,
-                                      builder: (context) {
-                                        return AlertDialog(
-                                          title: const Text('Student Info'),
-                                          actions: [
-                                            TextButton(
-                                                onPressed: () async {
-                                                  //Generating the invoice
-                                                  final pdfFile =
-                                                      await PdfInvoiceAPI
-                                                          .generatePdf(
-                                                              mapObjFromStudentObj);
-                                                  PdfApi.openFile(pdfFile);
-                                                },
-                                                child: const Text(
-                                                    'Generate Invoice'))
-                                          ],
-                                          content:
-                                              //checking Worksheet Type
-                                              selectedItem
-                                                      .contains('playschool')
-                                                  //Playschool Type
-                                                  ? Container(
-                                                      color:
-                                                          Colors.amber.shade100,
-                                                      height: 800,
-                                                      width: 1100,
-                                                      child: Column(
-                                                        children: [
-                                                          //Student Name
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                        .only(
-                                                                    left: 4),
-                                                            child: Container(
-                                                              alignment: Alignment
-                                                                  .centerLeft,
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .all(2),
-                                                              height: 40,
-                                                              width: 1100,
-                                                              decoration: BoxDecoration(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              5),
-                                                                  color: Colors
-                                                                      .white54),
-                                                              child: Text(
-                                                                  'Student Name: ${foundStudents[index].StudentName}'),
-                                                            ),
+                                onPressed: () {
+                                  Map<String, dynamic> mapObjFromStudentObj =
+                                      foundStudents[index].toJson();
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return AlertDialog(
+                                        backgroundColor: Colors.grey.shade900,
+                                        title: Text(
+                                          'Student Info',
+                                          style: GoogleFonts.adventPro(
+                                              fontSize: 35,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () async {
+                                              //Generating the invoice
+                                              final pdfFile =
+                                                  await PdfInvoiceAPI
+                                                      .generatePdf(
+                                                          mapObjFromStudentObj);
+                                              PdfApi.openFile(pdfFile);
+                                            },
+                                            child: Text(
+                                              'Generate Invoice',
+                                              style:
+                                                  GoogleFonts.ubuntuCondensed(
+                                                fontStyle: FontStyle.italic,
+                                                fontSize: 15,
+                                              ),
+                                            ),
+                                          )
+                                        ],
+                                        content:
+                                            //checking Worksheet Type
+                                            selectedItem.contains('playschool')
+                                                //Playschool Type
+                                                ? Container(
+                                                    color: Colors.black12,
+                                                    height: 800,
+                                                    width: 1100,
+                                                    child: Column(
+                                                      children: [
+                                                        //Student Name
+                                                        Container(
+                                                          color: Colors
+                                                              .grey.shade900,
+                                                          alignment: Alignment
+                                                              .centerLeft,
+                                                          height: 40,
+                                                          width: 1100,
+                                                          child: Text(
+                                                            'Student\'s Name: ${foundStudents[index].StudentName}',
+                                                            style: GoogleFonts
+                                                                .ubuntu(
+                                                                    fontSize:
+                                                                        20),
                                                           ),
-                                                          //Fname/Phone
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                        .only(
-                                                                    left: 4),
-                                                            child: Container(
-                                                              alignment: Alignment
-                                                                  .centerLeft,
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .all(2),
-                                                              height: 40,
-                                                              width: 1100,
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            5),
-                                                                color: Colors
-                                                                    .white54,
-                                                              ),
-                                                              child: Text(
-                                                                  'Father\'s Name \\ Phone Number : ${foundStudents[index].FatherNamePhone}'),
-                                                            ),
+                                                        ),
+                                                        //Fname/Phone
+                                                        Container(
+                                                          color: Colors
+                                                              .grey.shade900,
+                                                          alignment: Alignment
+                                                              .centerLeft,
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(2),
+                                                          height: 40,
+                                                          width: 1105,
+                                                          child: Text(
+                                                            'Gaurdian\'s Name: ${foundStudents[index].FatherNamePhone}',
+                                                            style: GoogleFonts
+                                                                .ubuntu(
+                                                                    fontSize:
+                                                                        20),
                                                           ),
-                                                          //Editable Fields Dynamic
-                                                          Expanded(
-                                                            child: ListView
-                                                                .builder(
-                                                              itemCount:
-                                                                  listOfPlaySchoolObjectParameters
-                                                                      .length,
-                                                              itemBuilder:
-                                                                  (context,
-                                                                          i) =>
-                                                                      Card(
-                                                                elevation: 1,
-                                                                margin: const EdgeInsets
-                                                                        .symmetric(
-                                                                    vertical:
-                                                                        2),
-                                                                child: ListTile(
-                                                                  title: Text(
-                                                                      '${listOfPlaySchoolObjectParameters[i]} : ${mapObjFromStudentObj["${listOfPlaySchoolObjectParameters[i]}"]}'),
-                                                                  trailing:
-                                                                      IconButton(
-                                                                          onPressed:
-                                                                              () {
-                                                                            showDialog(
-                                                                              context: context,
-                                                                              builder: (context) {
-                                                                                return AlertDialog(
-                                                                                  title: Text('Edit ?? ${listOfPlaySchoolObjectParameters[i]}'),
-                                                                                  content: TextField(
-                                                                                    onChanged: (value) {
-                                                                                      fieldValueAfterUpdate = value;
+                                                        ),
+                                                        // const SizedBox(
+                                                        //   height: 30,
+                                                        // ),
+                                                        //Editable Fields Dynamic
+                                                        Expanded(
+                                                          child:
+                                                              ListView.builder(
+                                                            itemCount:
+                                                                listOfPlaySchoolObjectParameters
+                                                                    .length,
+                                                            itemBuilder:
+                                                                (context, i) =>
+                                                                    Card(
+                                                              color: Colors
+                                                                  .black12,
+                                                              elevation: 1,
+                                                              margin: const EdgeInsets
+                                                                      .symmetric(
+                                                                  vertical: 4),
+                                                              child: ListTile(
+                                                                title: Text(
+                                                                    '${listOfPlaySchoolObjectParameters[i]} : ${mapObjFromStudentObj["${listOfPlaySchoolObjectParameters[i]}"]}'),
+                                                                trailing:
+                                                                    IconButton(
+                                                                        onPressed:
+                                                                            () {
+                                                                          showDialog(
+                                                                            context:
+                                                                                context,
+                                                                            builder:
+                                                                                (context) {
+                                                                              return AlertDialog(
+                                                                                title: Text('Edit ?? ${listOfPlaySchoolObjectParameters[i]}'),
+                                                                                content: TextField(
+                                                                                  onChanged: (value) {
+                                                                                    fieldValueAfterUpdate = value;
+                                                                                  },
+                                                                                ),
+                                                                                actions: [
+                                                                                  TextButton(
+                                                                                    onPressed: () {
+                                                                                      //making the change
+                                                                                      mapObjFromStudentObj["${listOfPlaySchoolObjectParameters[i]}"] = fieldValueAfterUpdate;
+                                                                                      //converting the updated map back to json
+                                                                                      PlaySchoolDataModel playSchoolDataModel = PlaySchoolDataModel.fromJson(mapObjFromStudentObj);
+                                                                                      updateStudentRecord(
+                                                                                        jsonFileName: selectedItem,
+                                                                                        sname: foundStudents[index].StudentName,
+                                                                                        fnamephone: foundStudents[index].FatherNamePhone,
+                                                                                        studentDataObject: playSchoolDataModel,
+                                                                                      );
+                                                                                      Navigator.of(context).pop();
                                                                                     },
-                                                                                  ),
-                                                                                  actions: [
-                                                                                    TextButton(
-                                                                                      onPressed: () {
-                                                                                        //making the change
-                                                                                        mapObjFromStudentObj["${listOfPlaySchoolObjectParameters[i]}"] = fieldValueAfterUpdate;
-                                                                                        //converting the updated map back to json
-                                                                                        PlaySchoolDataModel playSchoolDataModel = PlaySchoolDataModel.fromJson(mapObjFromStudentObj);
-                                                                                        updateStudentRecord(
-                                                                                          jsonFileName: selectedItem,
-                                                                                          sname: foundStudents[index].StudentName,
-                                                                                          fnamephone: foundStudents[index].FatherNamePhone,
-                                                                                          studentDataObject: playSchoolDataModel,
-                                                                                        );
-                                                                                        Navigator.of(context).pop();
-                                                                                      },
-                                                                                      child: const Text(
-                                                                                        'Submit',
-                                                                                      ),
-                                                                                    )
-                                                                                  ],
-                                                                                );
-                                                                              },
-                                                                            );
-                                                                          },
-                                                                          icon:
-                                                                              const Icon(Icons.edit_note_outlined)),
-                                                                ),
+                                                                                    child: const Text(
+                                                                                      'Submit',
+                                                                                    ),
+                                                                                  )
+                                                                                ],
+                                                                              );
+                                                                            },
+                                                                          );
+                                                                        },
+                                                                        icon: const Icon(
+                                                                            Icons.edit_note_outlined)),
                                                               ),
                                                             ),
-                                                          )
-                                                        ],
-                                                      ),
-                                                    )
-                                                  //Genric Type
-                                                  : Container(
-                                                      height: 800,
-                                                      width: 1100,
-                                                      child: Column(
-                                                        children: [
-                                                          Container(
-                                                            color: Colors
-                                                                .greenAccent,
                                                           ),
-                                                        ],
-                                                      ),
+                                                        )
+                                                      ],
                                                     ),
-                                        );
-                                      },
-                                    );
-                                  },
-                                  icon: const Icon(Icons.info_outline)),
+                                                  )
+                                                //Genric Type
+                                                : Container(
+                                                    height: 800,
+                                                    width: 1100,
+                                                    child: Column(
+                                                      children: [
+                                                        Container(
+                                                          color: Colors
+                                                              .greenAccent,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                      );
+                                    },
+                                  );
+                                },
+                                icon: const Icon(Icons.info_outline),
+                              ),
                               IconButton(
                                 onPressed: () {
                                   showDialog(

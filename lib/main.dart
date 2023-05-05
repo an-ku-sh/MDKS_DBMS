@@ -48,6 +48,7 @@ class MyFluentApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       darkTheme: FluentThemeData(
         brightness: Brightness.dark,
+        accentColor: Colors.orange,
       ),
       home: const FluentHomePage(),
     );

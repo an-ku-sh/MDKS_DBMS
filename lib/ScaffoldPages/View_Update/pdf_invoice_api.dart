@@ -10,7 +10,7 @@ class PdfInvoiceAPI {
   static Future<File> generatePdf(Map<String, dynamic> studentDataMap) async {
     print('generate pdf called');
     final pdf = Document();
-    PdfPageFormat.a4;
+    PdfPageFormat.a6;
     final mdksLogoImage =
         (await rootBundle.load('lib/IMG/mdks.png')).buffer.asUint8List();
     //formatting the pdf
